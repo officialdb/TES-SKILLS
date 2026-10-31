@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.2.2] - 2026-10-31
 
 ### Changed - Website Copy & Visual Presentation Standards Refinement
+- **Skill Version Increments:** Incremented `ui-ux-standards` and `frontend-quality` to `1.0.1` in the skill registry and frontmatter to enable distribution via `tes update`.
 - **Prohibited Decorative Animated Dots:** Updated `ui-ux-standards` and `frontend-quality` to strictly prohibit cosmetic blinking, pulsing, or flashing dots beside titles, headings, badges, hero sections, cards, and navigation.
 - **Permitted Functional Indicators:** Clearly distinguished decorative dots from genuine functional system indicators (such as WebSocket connectivity, active streaming, background progress), requiring motion in permitted indicators to be subtle and accessible.
 - **Website Copywriting Standards (Eliminating Em Dashes):** Established a strong copywriting preference against using em dashes (`—`) across all user-facing website content (headlines, section titles, subheadings, feature bullets, paragraphs, testimonials, CTAs, navigation, metadata) in favor of natural sentence structure, commas, prepositions, or distinct sentences.

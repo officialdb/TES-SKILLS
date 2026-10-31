@@ -100,7 +100,7 @@ skills:
 
   - id: ui-ux-standards
     name: UI/UX Standards
-    version: 1.0.0
+    version: 1.0.1
     category: design
     description: Professional, restrained, accessible interface design with clear hierarchy, purposeful color, clean typography, and WCAG compliance.
     path: skills/ui-ux-standards
@@ -109,7 +109,7 @@ skills:
 
   - id: frontend-quality
     name: Frontend Quality
-    version: 1.0.0
+    version: 1.0.1
     category: design
     description: Modern frontend architecture, responsive resilience, Core Web Vitals performance, component composition, and state predictability.
     path: skills/frontend-quality
