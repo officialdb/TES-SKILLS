@@ -22,6 +22,12 @@ Thank you for your interest in contributing to Techpronnet Engineering Skills (T
    pytest
    ```
 
+## Branching Strategy
+
+TES uses a dual-branch model:
+- **`main`**: Production-ready, stable releases. Direct commits are restricted to tagged release promotions.
+- **`develop`**: Active integration branch for ongoing development, new features, and bug fixes. Feature branches should branch from and open pull requests against `develop`.
+
 ## Authoring New Skills
 
 Every skill must adhere to the Agent Skills open standard:
