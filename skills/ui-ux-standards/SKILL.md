@@ -1,7 +1,7 @@
 ---
 name: ui-ux-standards
-version: 1.1.0
-description: Professional, accessible interface design with clear visual hierarchy, purposeful color, responsive navigation, and WCAG compliance. Use for UI/UX work.
+version: 1.2.0
+description: Professional, accessible interface design with clear visual hierarchy, purposeful color, responsive layouts, dashboard composition, and WCAG compliance.
 compatibility:
   - hermes
   - opencode
@@ -73,7 +73,26 @@ compatibility:
 
 ---
 
-## 4. Accessibility & Universal Usability (WCAG 2.1 AA)
+## 4. Interface Layout Patterns & Library Brand Independence
+
+1. **Dashboard Composition (Grounded in Reference A):**
+   - Structure desktop dashboards around a persistent vertical sidebar (brand top, primary/secondary links, user profile anchor at bottom) and a contextual header (greeting, search, utility icons, primary action CTA).
+   - Organize multi-column workspaces into discrete card widgets grouped by purpose: analytical metrics (bar charts, circular progress), active utilities (timers, note checklists), and status trackers.
+   - Balance high information density with 16–24px internal card padding and subtle 1px container borders rather than heavy drop shadows.
+   - Reserve accent colors (e.g. purple) strictly for active navigation, key CTAs, and chart fills.
+2. **Landing Page Architecture (Grounded in Reference B):**
+   - Structure desktop headers horizontally with brand on the left, primary navigation in the center, and account links / primary CTA on the right.
+   - Use centered editorial hero layouts pairing expressive serif headlines with constrained sans-serif descriptions (`max-w-2xl` / 500–680px) to maximize readability.
+   - Enforce conversion action hierarchy: pair a solid primary CTA button with a complementary outlined secondary action ("Watch A Demo").
+   - Feature product-led visual showcases (realistic interface mockups, outcome badges like "$5,000 collected") in place of abstract stock photos. Use generous whitespace to focus attention naturally.
+3. **Component Library Brand Independence:**
+   - Treat component libraries (e.g. shadcn/ui, Flowbite) as implementation building blocks, never as a default aesthetic.
+   - Map library tokens (color, typography, corner radii, spacing) to the project's unique brand design tokens.
+   - Ensure visual consistency across buttons, inputs, cards, dialogs, and tables. Strip out default decorative pulsing dots or noisy gradient gimmicks.
+
+---
+
+## 5. Accessibility & Universal Usability (WCAG 2.1 AA)
 
 - **Color Contrast:** Ensure text achieves a minimum contrast ratio of 4.5:1 against its background (3:1 for large text 18pt+). Never convey critical status by color alone.
 - **Keyboard Navigation & Focus:** Every interactive element must be reachable and operable via keyboard (`Tab`, `Shift+Tab`, `Enter`, `Space`). Never remove focus rings without providing an equally visible custom focus outline.
@@ -81,20 +100,25 @@ compatibility:
 
 ---
 
-## 5. Expected Deliverables
+## 6. Expected Deliverables
 1. **Polished UI Components:** Accessible, beautifully spaced, responsive interface designs free of decorative blinking artifacts.
-2. **Responsive Navigation Specs:** Clean desktop layouts and mobile hamburger menu designs adapted to product architecture.
-3. **Refined Website Copy:** Natural, human-sounding interface copy free of em dash crutches and promotional clichés.
-4. **Design Specification:** Clear design tokens (typography, color, spacing) matching existing systems.
-5. **Accessibility Sign-off:** Verification of keyboard navigation, screen reader labels, and contrast compliance.
+2. **Dashboard & Workspace Layouts:** Structured multi-column dashboard compositions, scannable data widgets, and persistent or collapsible sidebars.
+3. **High-Converting Landing Pages:** Editorial typography, clear CTA hierarchy, and product-led hero showcases.
+4. **Responsive Navigation Specs:** Clean desktop layouts and mobile hamburger menu designs adapted to product architecture.
+5. **Refined Website Copy:** Natural, human-sounding interface copy free of em dash crutches and promotional clichés.
+6. **Design Specification:** Clear design tokens (typography, color, spacing) matching existing systems.
+7. **Accessibility Sign-off:** Verification of keyboard navigation, screen reader labels, and contrast compliance.
 
 ---
 
-## 6. Progressive Disclosure (Reference Documents)
+## 7. Progressive Disclosure (Reference Documents)
 Consult these bundled documents only when specific deep guidance is needed:
 
 - **WCAG 2.1 AA accessibility guidelines:** Consult [accessibility-wcag.md](references/accessibility-wcag.md).
 - **Visual design foundations and copy guidelines:** Consult [visual-design-principles.md](references/visual-design-principles.md).
+- **Dashboard design principles and information architecture:** Consult [dashboard-design-principles.md](references/dashboard-design-principles.md).
+- **Landing page design principles and visual storytelling:** Consult [landing-page-design-principles.md](references/landing-page-design-principles.md).
+- **Component library design guidelines and visual consistency:** Consult [component-library-design-guidelines.md](references/component-library-design-guidelines.md).
 - **Responsive navigation design patterns:** Consult [responsive-navigation-design.md](references/responsive-navigation-design.md).
 - **Responsive navigation verification checklist:** Consult [responsive-navigation-checklist.md](checklists/responsive-navigation-checklist.md).
 - **UI/UX inspection checklist:** Consult [ui-ux-review-checklist.md](checklists/ui-ux-review-checklist.md).

@@ -12,3 +12,6 @@
 - [ ] Are async loading states represented with accurately sized skeletons?
 - [ ] Are error boundaries in place around external widgets or complex visualizations?
 - [ ] Are inputs debounced or throttled where appropriate?
+- [ ] Are component libraries evaluated using the 10-point selection criteria before introducing new UI dependencies?
+- [ ] Do dashboard layouts collapse cleanly from multi-column grids to single column without horizontal overflow?
+- [ ] Are above-the-fold hero mockups optimized for LCP with eager loading and explicit aspect ratios?

@@ -1,7 +1,7 @@
 ---
 name: frontend-quality
-version: 1.1.0
-description: Frontend architecture, Core Web Vitals, responsive navigation implementation, and state predictability. Use when building or optimizing web interfaces.
+version: 1.2.0
+description: Frontend architecture, Core Web Vitals, component library integration, dashboard grids, and responsive layout resilience. Use when building web apps.
 compatibility:
   - hermes
   - opencode
@@ -54,15 +54,26 @@ compatibility:
    - Prevent background body scrolling (`overflow: hidden` on document body) when modal drawers or full-screen navigation overlays are active.
    - Close mobile navigation automatically when a link is clicked, and handle viewport resize gracefully so menus do not linger when returning to desktop views.
    - Share navigation items through a single source-of-truth data structure rather than duplicating markup across desktop and mobile templates. Avoid heavy third-party menu dependencies.
+6. **Component Library Selection & Integration (shadcn/ui & Flowbite):**
+   - Apply the 10-point evaluation criteria before installing UI packages: check existing project dependencies, styling approach (Tailwind, CSS modules), accessibility, and bundle impact.
+   - Favor headless, locally owned primitives (shadcn/ui via Radix UI) or Tailwind-integrated suites (Flowbite) over heavy runtime CSS-in-JS libraries.
+   - Reuse existing primitives for standard interactions (Dialog, DropdownMenu, Tabs, Select); customize tokens to match project identity; compose primitives for domain widgets; build custom only when interactions are genuinely unique.
+   - Never invent non-existent component props or configurations. Consult the installed library version documentation directly.
+7. **Dashboard & Landing Page Technical Implementation:**
+   - Implement multi-column dashboard layouts using responsive CSS Grid (`grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6`), persistent or collapsible sidebars, and isolated widget error boundaries.
+   - Build accessible data visualizations: circular progress rings via SVG `stroke-dashoffset` with `role="progressbar"`, accessible bar chart figures, and interval-cleared digital timers with polite screen-reader updates.
+   - Prevent landing page horizontal overflow from tilted mockup cards using `overflow-x: clip`, and optimize LCP (<2.5s) with eager image preloads and explicit aspect ratios.
 
 ---
 
 ## 3. Expected Deliverables
 1. **Quality Frontend Code:** Clean, typed component implementations without layout shift bugs or decorative pulsing CSS.
-2. **Responsive Navigation Components:** Accessible mobile hamburger menus with full keyboard operability, ARIA state bindings, and desktop layouts.
-3. **Reviewed Template Content:** User-facing template strings free of em dash crutches and promotional clutter.
-4. **Performance Audit:** Verification that bundle sizes and Core Web Vitals fall within budget.
-5. **Responsive Verification:** Evidence of verified layout integrity across mobile, tablet, and desktop breakpoints.
+2. **Responsive Dashboard & Workspace Grids:** Multi-column layouts, collapsible sidebars, and accessible data widgets with independent error boundaries.
+3. **High-Performance Landing Pages:** Hero assets optimized for Core Web Vitals (LCP < 2.5s, CLS < 0.1), fluid typography, and zero horizontal overflow.
+4. **Vetted Component Library Integration:** Clean adoption of shadcn/ui, Flowbite, or headless primitives customized to brand tokens without dependency bloat.
+5. **Responsive Navigation Components:** Accessible mobile hamburger menus with full keyboard operability, ARIA state bindings, and desktop layouts.
+6. **Reviewed Template Content:** User-facing template strings free of em dash crutches and promotional clutter.
+7. **Performance Audit:** Verification that bundle sizes and Core Web Vitals fall within budget.
 
 ---
 
@@ -70,6 +81,9 @@ compatibility:
 Consult these bundled documents only when specific deep guidance is needed:
 
 - **Core Web Vitals deep-dive and diagnostics:** Consult [core-web-vitals.md](references/core-web-vitals.md).
+- **Frontend component library selection and integration:** Consult [frontend-component-library-selection.md](references/frontend-component-library-selection.md).
+- **Dashboard layout implementation and data widgets:** Consult [dashboard-layout-implementation.md](references/dashboard-layout-implementation.md).
+- **Landing page implementation and performance architecture:** Consult [landing-page-implementation.md](references/landing-page-implementation.md).
 - **Responsive navigation implementation and accessibility:** Consult [responsive-navigation-implementation.md](references/responsive-navigation-implementation.md).
 - **Frontend performance verification:** Consult [frontend-performance-checklist.md](checklists/frontend-performance-checklist.md).
 - **Performance audit report template:** Consult [frontend-audit-report.md](templates/frontend-audit-report.md).

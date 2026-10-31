@@ -205,8 +205,8 @@ TES features a decoupled adapter architecture:
 - `deployment-verification`: Post-deployment smoke tests, canary health checks, zero-downtime cutover.
 
 ### Design and Frontend
-- `ui-ux-standards`: Modern, restrained visual design, typography, spacing, responsive navigation, WCAG accessibility.
-- `frontend-quality`: Performance metrics (Core Web Vitals), state management, responsive navigation implementation, layout resilience.
+- `ui-ux-standards`: Modern, restrained visual design, typography, spacing, responsive navigation, dashboard & landing page composition, WCAG accessibility.
+- `frontend-quality`: Performance metrics (Core Web Vitals), state management, responsive layouts, component library integration (shadcn/ui, Flowbite).
 
 ### Memory
 - `engineering-memory`: Local-first, offline markdown engineering knowledge base (`.engineering/`).

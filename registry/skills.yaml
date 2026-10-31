@@ -109,20 +109,20 @@ skills:
 
   - id: ui-ux-standards
     name: UI/UX Standards
-    version: 1.1.0
+    version: 1.2.0
     category: design
-    description: Professional, accessible interface design with clear visual hierarchy, purposeful color, responsive navigation, and WCAG compliance.
+    description: Professional, accessible interface design with clear visual hierarchy, purposeful color, responsive layouts, dashboard composition, and WCAG compliance.
     path: skills/ui-ux-standards
-    tags: [design, ui, ux, accessibility, typography, styling, web, navigation, responsive]
+    tags: [design, ui, ux, accessibility, typography, styling, web, navigation, responsive, dashboards, landing-pages]
     compatibility: [hermes, opencode, codex, claude-code, gemini-cli, generic]
 
   - id: frontend-quality
     name: Frontend Quality
-    version: 1.1.0
+    version: 1.2.0
     category: design
-    description: Frontend architecture, Core Web Vitals, responsive navigation implementation, component composition, and state predictability.
+    description: Frontend architecture, Core Web Vitals, component library integration, dashboard grids, and responsive layout resilience.
     path: skills/frontend-quality
-    tags: [frontend, web-vitals, performance, responsive, navigation, state-management, react]
+    tags: [frontend, web-vitals, performance, responsive, navigation, state-management, react, shadcn, flowbite]
     compatibility: [hermes, opencode, codex, claude-code, gemini-cli, generic]
 
   - id: engineering-memory

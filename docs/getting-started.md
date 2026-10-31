@@ -158,3 +158,4 @@ Write automated tests and report the actual verification results.
 - Learn full CLI command options in the [Command Reference](commands.md).
 - Solve common setup questions in the [Troubleshooting Guide](troubleshooting.md).
 - Understand how adapters integrate with different agents in [Adapters Documentation](adapters.md).
+

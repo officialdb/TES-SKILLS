@@ -108,16 +108,16 @@ def test_no_duplicate_instruction_blocks_between_ui_skills():
     assert len(cat_report.potential_duplicates) == 0, f"Duplicate blocks found: {cat_report.potential_duplicates}"
 
 
-def test_skills_versioned_at_1_1_0(loaded_registry: Registry, skills_dir: Path):
-    """Verify ui-ux-standards and frontend-quality are versioned at 1.1.0 in registry and frontmatter."""
+def test_skills_versioned_at_1_2_0(loaded_registry: Registry, skills_dir: Path):
+    """Verify ui-ux-standards and frontend-quality are versioned at 1.2.0 in registry and frontmatter."""
     ui_meta = loaded_registry.get_skill("ui-ux-standards")
     fq_meta = loaded_registry.get_skill("frontend-quality")
 
     assert ui_meta is not None
-    assert ui_meta.version == "1.1.0"
+    assert ui_meta.version == "1.2.0"
 
     assert fq_meta is not None
-    assert fq_meta.version == "1.1.0"
+    assert fq_meta.version == "1.2.0"
 
     # Verify unrelated skills remain at 1.0.0
     for sid in ["engineering-core", "software-engineering", "security-audit", "devops-engineering"]:
@@ -127,18 +127,18 @@ def test_skills_versioned_at_1_1_0(loaded_registry: Registry, skills_dir: Path):
     ui_fm, _, _ = parse_frontmatter((skills_dir / "ui-ux-standards" / "SKILL.md").read_text(encoding="utf-8"))
     fq_fm, _, _ = parse_frontmatter((skills_dir / "frontend-quality" / "SKILL.md").read_text(encoding="utf-8"))
 
-    assert str(ui_fm.get("version")) == "1.1.0"
-    assert str(fq_fm.get("version")) == "1.1.0"
+    assert str(ui_fm.get("version")) == "1.2.0"
+    assert str(fq_fm.get("version")) == "1.2.0"
 
 
-def test_update_mechanism_identifies_1_1_0_as_newer(temp_project: Path, loaded_registry: Registry):
-    """Verify TES update mechanism identifies 1.1.0 as an available update over installed 1.0.0 and 1.0.1."""
+def test_update_mechanism_identifies_1_2_0_as_newer(temp_project: Path, loaded_registry: Registry):
+    """Verify TES update mechanism identifies 1.2.0 as an available update over installed 1.0.1 and 1.1.0."""
     adapter = get_adapter("opencode")
     manifest = TargetManifest(
         skills={
             "ui-ux-standards": InstalledSkillManifest(
                 skill_id="ui-ux-standards",
-                version="1.0.1",
+                version="1.1.0",
                 installed_at="2026-10-31T10:51:00Z",
                 scope=Scope.PROJECT,
                 target="opencode",
@@ -147,7 +147,7 @@ def test_update_mechanism_identifies_1_1_0_as_newer(temp_project: Path, loaded_r
             ),
             "frontend-quality": InstalledSkillManifest(
                 skill_id="frontend-quality",
-                version="1.0.0",
+                version="1.0.1",
                 installed_at="2026-10-31T10:51:00Z",
                 scope=Scope.PROJECT,
                 target="opencode",
@@ -172,15 +172,15 @@ def test_update_mechanism_identifies_1_1_0_as_newer(temp_project: Path, loaded_r
 
     status_map = {s.skill_id: s for s in statuses}
 
-    # ui-ux-standards update available (1.0.1 -> 1.1.0)
+    # ui-ux-standards update available (1.1.0 -> 1.2.0)
     assert status_map["ui-ux-standards"].update_available is True
-    assert status_map["ui-ux-standards"].installed_version == "1.0.1"
-    assert status_map["ui-ux-standards"].latest_version == "1.1.0"
+    assert status_map["ui-ux-standards"].installed_version == "1.1.0"
+    assert status_map["ui-ux-standards"].latest_version == "1.2.0"
 
-    # frontend-quality update available (1.0.0 -> 1.1.0)
+    # frontend-quality update available (1.0.1 -> 1.2.0)
     assert status_map["frontend-quality"].update_available is True
-    assert status_map["frontend-quality"].installed_version == "1.0.0"
-    assert status_map["frontend-quality"].latest_version == "1.1.0"
+    assert status_map["frontend-quality"].installed_version == "1.0.1"
+    assert status_map["frontend-quality"].latest_version == "1.2.0"
 
     # engineering-core is up to date (1.0.0 == 1.0.0)
     assert status_map["engineering-core"].update_available is False
@@ -247,4 +247,83 @@ def test_frontend_quality_responsive_navigation_implementation(skills_dir: Path)
     assert "Escape Key Dismissal" in ref_content
     assert "Single Source of Navigation Items" in ref_content
     assert "Zero Layout Shifts (CLS < 0.1)" in ref_content
+
+
+def test_ui_ux_standards_dashboard_and_landing_page_references(skills_dir: Path):
+    """Verify ui-ux-standards contains comprehensive references for dashboard and landing page design."""
+    skill_file = skills_dir / "ui-ux-standards" / "SKILL.md"
+    content = skill_file.read_text(encoding="utf-8")
+
+    # Main SKILL.md integration
+    assert "dashboard-design-principles.md" in content
+    assert "landing-page-design-principles.md" in content
+    assert "component-library-design-guidelines.md" in content
+
+    # Dashboard reference verification (Reference A)
+    dash_file = skills_dir / "ui-ux-standards" / "references" / "dashboard-design-principles.md"
+    assert dash_file.exists()
+    dash_text = dash_file.read_text(encoding="utf-8")
+    assert "Grounded Observations" in dash_text
+    assert "Persistent Vertical Left Sidebar" in dash_text
+    assert "Three-Column Desktop Workspace" in dash_text
+    assert "Analytics & Progress" in dash_text
+    assert "Time Tracker" in dash_text
+    assert "Domain & Product Adaptability" in dash_text
+
+    # Landing page reference verification (Reference B)
+    lp_file = skills_dir / "ui-ux-standards" / "references" / "landing-page-design-principles.md"
+    assert lp_file.exists()
+    lp_text = lp_file.read_text(encoding="utf-8")
+    assert "Centered Editorial Hero Composition" in lp_text
+    assert "Conversion Action Hierarchy" in lp_text
+    assert "Product-Led Visual Showcase" in lp_text
+    assert "Floating Metric Badge" in lp_text
+    assert "Editorial Typography Contrast" in lp_text
+
+    # Component library design guidelines
+    lib_file = skills_dir / "ui-ux-standards" / "references" / "component-library-design-guidelines.md"
+    assert lib_file.exists()
+    lib_text = lib_file.read_text(encoding="utf-8")
+    assert "Libraries as Implementation Resources, Not Design Strategies" in lib_text
+    assert "Never Accept Default Library Themes Unconditionally" in lib_text
+    assert "No Decorative Animated Dots" in lib_text
+
+
+def test_frontend_quality_component_library_and_layout_references(skills_dir: Path):
+    """Verify frontend-quality contains detailed implementation guides for libraries, dashboards, and landing pages."""
+    skill_file = skills_dir / "frontend-quality" / "SKILL.md"
+    content = skill_file.read_text(encoding="utf-8")
+
+    # Main SKILL.md integration
+    assert "frontend-component-library-selection.md" in content
+    assert "dashboard-layout-implementation.md" in content
+    assert "landing-page-implementation.md" in content
+
+    # Library selection guide verification
+    lib_sel = skills_dir / "frontend-quality" / "references" / "frontend-component-library-selection.md"
+    assert lib_sel.exists()
+    lib_sel_text = lib_sel.read_text(encoding="utf-8")
+    assert "The 10-Point Library Selection Checklist" in lib_sel_text
+    assert "shadcn/ui" in lib_sel_text
+    assert "Flowbite" in lib_sel_text
+    assert "Radix UI" in lib_sel_text
+    assert "Existing vs. Custom Components" in lib_sel_text
+
+    # Dashboard layout implementation verification
+    dash_impl = skills_dir / "frontend-quality" / "references" / "dashboard-layout-implementation.md"
+    assert dash_impl.exists()
+    dash_impl_text = dash_impl.read_text(encoding="utf-8")
+    assert "Multi-Column Dashboard Layout Architecture" in dash_impl_text
+    assert "ProgressRing" in dash_impl_text
+    assert "Accessible Bar Charts" in dash_impl_text
+    assert "Digital Timer Widget & Interval Hygiene" in dash_impl_text
+
+    # Landing page implementation verification
+    lp_impl = skills_dir / "frontend-quality" / "references" / "landing-page-implementation.md"
+    assert lp_impl.exists()
+    lp_impl_text = lp_impl.read_text(encoding="utf-8")
+    assert "Centered Hero Section Architecture" in lp_impl_text
+    assert "overflow-x: clip" in lp_impl_text
+    assert "Responsive Product Mockup Container" in lp_impl_text
+    assert "Optimizing Core Web Vitals on Landing Pages" in lp_impl_text
 
