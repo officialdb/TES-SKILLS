@@ -11,4 +11,5 @@
 - [ ] Are all interactive elements accessible via keyboard (`Tab`, `Enter`, `Space`)?
 - [ ] Are focus rings clearly visible when tabbing through controls?
 - [ ] Has the layout been verified across mobile (375px), tablet (768px), and desktop?
+- [ ] Does navigation adapt cleanly between desktop links and an accessible mobile hamburger menu without horizontal overflow?
 - [ ] Do animations respect `@media (prefers-reduced-motion: reduce)`?
