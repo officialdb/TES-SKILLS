@@ -1,5 +1,6 @@
 ---
 name: ui-ux-standards
+version: 1.0.1
 description: Professional, accessible interface design with clear visual hierarchy, purposeful color, clean typography, and WCAG compliance. Use for UI/UX work.
 compatibility:
   - hermes
@@ -32,20 +33,21 @@ compatibility:
    - Base margins, paddings, and component sizes on a strict 4px / 8px spatial grid. Use whitespace rather than heavy divider lines.
 3. **Purposeful Color & Motion Restraint:**
    - Build upon neutral, muted backgrounds (slate, zinc, or gray). Reserve vibrant accent colors strictly for interactive focus, primary actions, and semantic state indicators.
-   - **No Decorative Animated Dots:** Prohibit decorative blinking, flashing, or pulsing dots beside headings, badges, hero sections, cards, or navigation. Animated dots used merely to appear "modern" create cognitive distraction and mimic alarms.
-   - *Functional Indicator Exception:* Subtle pulsing or status dots are permissible only when communicating genuine live state (real-time connection, active streaming, background progress).
+   - **No Decorative Animated Dots:** Prohibit decorative blinking, flashing, or pulsing dots. No unnecessary animated dot indicators in headings, hero sections, navigation, backgrounds, or content. Animated dots used merely to appear "modern" create cognitive distraction and mimic alarms.
+   - **Functional Indicators Permitted:** Functional loading, connection, and status indicators remain permitted when genuinely necessary (real-time connection, active streaming, background progress). Prefer subtle, purposeful animation over distracting visual effects.
 
 ---
 
 ## 2. Website Copywriting & Presentation
 
 1. **Avoid Em Dashes in Website Copy:**
-   - Strong preference against using em dashes (`—`) across website content (headlines, section titles, subheadings, feature bullets, paragraphs, testimonials, CTAs, navigation, and metadata).
-   - Rewrite sentences naturally using commas, full stops, colons, or clean phrasing. Do not mechanically swap em dashes with commas; restructure thoughts naturally.
+   - Strong preference to avoid em dashes (`—`) in website copy across headings, hero sections, navigation, descriptions, paragraphs, buttons, testimonials, CTAs, and metadata.
+   - Prefer natural sentence construction, commas, full stops, and colons. Do not mechanically replace em dashes with commas; rewrite sentences naturally.
    - *Examples:*
      - Avoid: "Build better systems — without the complexity." -> Prefer: "Build better systems without unnecessary complexity."
      - Avoid: "Everything your team needs — in one place." -> Prefer: "Everything your team needs in one place."
-   - *Context Boundary:* Technical documentation, code syntax, and CLI flags are exempt when syntactically required.
+     - Avoid: "We help businesses grow — with technology that works." -> Prefer: "We help businesses grow with technology that works."
+   - *Context Boundary:* Technical documentation, code syntax, and CLI flags remain exempt when syntactically required.
 2. **Authentic, Professional Tone:**
    - Write clearly and concisely without generic AI promotional jargon ("supercharge", "unleash", "cutting-edge").
    - Avoid exaggerated claims and unearned superlatives. Never fabricate testimonials, metrics, or capabilities. Adapt tone to the specific industry and user context.

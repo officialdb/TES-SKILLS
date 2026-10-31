@@ -114,6 +114,7 @@ TES features a decoupled adapter architecture:
 ### Engineering
 - `engineering-core`: Fundamental principles, understand-before-modifying, balanced autonomy, quality gates.
 - `system-architect`: Domain modeling, architectural decision records (ADRs), module boundary design.
+- `backend-engineering`: Production backend architecture, business services, API lifecycle, persistence integration, background tasks, and security boundaries.
 - `software-engineering`: Clean code, dependency hygiene, error handling, refactoring patterns.
 - `code-review`: Dual-axis PR review (standards compliance + specification verification).
 - `project-onboarding`: Fast repository structure comprehension and dependency mapping.
@@ -139,7 +140,7 @@ TES features a decoupled adapter architecture:
 
 ## 📦 Bundles
 
-- `engineering-suite`: `engineering-core`, `system-architect`, `software-engineering`, `code-review`, `testing-strategy`, `project-onboarding`
+- `engineering-suite`: `engineering-core`, `system-architect`, `backend-engineering`, `software-engineering`, `code-review`, `testing-strategy`, `project-onboarding`
 - `security-suite`: `security-audit`, `secure-development`, `threat-modeling`
 - `release-suite`: `devops-engineering`, `deployment-verification`
 - `complete-suite`: All published TES skills

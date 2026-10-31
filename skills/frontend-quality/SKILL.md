@@ -1,5 +1,6 @@
 ---
 name: frontend-quality
+version: 1.0.1
 description: Frontend architecture, Core Web Vitals optimization, responsive layout resilience, and state predictability. Use when building or optimizing web interfaces.
 compatibility:
   - hermes
@@ -40,12 +41,13 @@ compatibility:
    - Design small, focused components with explicit props and strong TypeScript typing. Separate presentational components from stateful data-fetching containers.
    - Build mobile-first. Ensure layouts adapt seamlessly from 320px mobile viewports to ultra-wide displays without horizontal scrolling.
 3. **CSS Motion Hygiene (Eliminate Decorative Blinking):**
-   - Prohibit `@keyframes` pulse or blink animations on decorative elements (e.g., `animate-pulse` or `animate-ping` on static section badges or title dots).
-   - Require animated status indicators (such as `<LiveBadge />`) to bind directly to reactive state boolean flags (`isStreaming`, `isConnecting`). When state is idle or static, animations must be inactive.
+   - Avoid unnecessary blinking and pulsing CSS animations. Prohibit `@keyframes` pulse or blink animations on decorative elements (e.g., `animate-pulse` or `animate-ping` on static section badges or title dots).
+   - Identify decorative animated dots during frontend reviews and remove them.
+   - Preserve functional animations when genuinely necessary (active streaming, real-time connecting); require animated status indicators (such as `<LiveBadge />`) to bind directly to reactive state boolean flags (`isStreaming`, `isConnecting`). When state is idle or static, animations must be inactive.
    - Wrap continuous keyframe animations inside `@media (prefers-reduced-motion: no-preference)`.
 4. **Template String & Copy Auditing:**
-   - Audit JSX templates, HTML files, and localization records to eliminate em dashes (`—`) from user-facing headings and promotional strings.
-   - Refactor copy into natural grammatical structures (commas, prepositions, or distinct sentences). Maintain hyphenated syntax in code identifiers and CLI arguments.
+   - Avoid excessive em dashes in user-facing website strings. Review headings, descriptions, paragraphs, buttons, and marketing copy across JSX templates, HTML files, and localization records to eliminate em dashes (`—`).
+   - Refactor copy into natural grammatical structures (commas, prepositions, or distinct sentences). Preserve functional animations and technical uses of the em dash where appropriate (such as code identifiers and CLI arguments).
 
 ---
 

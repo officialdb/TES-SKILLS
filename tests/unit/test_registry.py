@@ -8,7 +8,7 @@ def test_registry_loading(loaded_registry: Registry):
     skills = loaded_registry.list_skills()
     bundles = loaded_registry.list_bundles()
 
-    assert len(skills) == 14
+    assert len(skills) == 15
     assert len(bundles) == 4
 
 

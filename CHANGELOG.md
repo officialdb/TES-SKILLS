@@ -7,7 +7,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.2.2] - 2026-10-31
 
+### Added - Backend Engineering Skill (v1.0.0)
+- **New Foundation Skill (`backend-engineering`):** Created a comprehensive, framework-independent, language-agnostic, and production-oriented backend engineering skill (`skills/backend-engineering/SKILL.md`) structured under TES's 3-level progressive disclosure architecture.
+- **Reference Manuals (Level 3 Knowledge):** Added 10 specialized backend engineering reference documents in `skills/backend-engineering/references/`:
+  - `backend-architecture.md`: Clean architecture, modular monoliths, DDD, dependency injection, and 12-factor configuration.
+  - `api-and-http.md`: Ingress/egress request lifecycle, HTTP status codes, uniform RFC 7807 error envelopes, and pagination strategies.
+  - `authentication-authorization.md`: AuthN vs AuthZ, session vs JWT lifecycles, Argon2id/bcrypt password hashing, RBAC/ABAC, IDOR mitigation, and multi-tenancy.
+  - `business-logic.md`: Service layer pattern, transactional boundaries, state machines, domain events, and typed exceptions.
+  - `persistence-integration.md`: ORM hygiene, N+1 query elimination via eager loading, optimistic/pessimistic locking, and zero-downtime expand/contract schema migrations.
+  - `background-processing.md`: Asynchronous task execution, idempotent job keys, exponential backoff with jitter, and dead-letter queues.
+  - `performance-and-caching.md`: Profiling-driven optimization, multi-tier caching (in-memory & distributed Redis/Memcached), cache stampede mitigation, and event-driven cache invalidation.
+  - `error-handling-and-logging.md`: Structured JSON logging, correlation IDs (`X-Request-ID`), sensitive credential/PII redaction, and client error sanitization.
+  - `backend-security.md`: Zero-trust server boundaries, parameterized SQL queries, SSRF IP/DNS filtering, mass-assignment DTO validation, and timing attack prevention.
+  - `production-readiness.md`: Container runtime requirements, separate liveness (`/health/live`) and readiness (`/health/ready`) probes, graceful `SIGTERM` shutdown drains, and worker concurrency tuning.
+- **Actionable Checklists & Templates:**
+  - `checklists/backend-review-checklist.md`: Engineering review criteria across design, reliability, performance, and operational telemetry.
+  - `checklists/backend-security-checklist.md`: Comprehensive security verification gate for backend code changes.
+  - `checklists/production-readiness-checklist.md`: Deployment gate for operational health, graceful shutdown, migrations, and alerting.
+  - `templates/service-spec-template.md`: Standard specification template for planning new backend services and APIs.
+- **Registry & Bundle Membership:** Registered `backend-engineering` in `registry/skills.yaml` and bundled into `engineering-suite` and `complete-suite` in `registry/bundles.yaml`.
+
 ### Changed - Website Copy & Visual Presentation Standards Refinement
+- **Skill Version Increments:** Incremented `ui-ux-standards` and `frontend-quality` to `1.0.1` in the skill registry and frontmatter to enable distribution via `tes update`.
 - **Prohibited Decorative Animated Dots:** Updated `ui-ux-standards` and `frontend-quality` to strictly prohibit cosmetic blinking, pulsing, or flashing dots beside titles, headings, badges, hero sections, cards, and navigation.
 - **Permitted Functional Indicators:** Clearly distinguished decorative dots from genuine functional system indicators (such as WebSocket connectivity, active streaming, background progress), requiring motion in permitted indicators to be subtle and accessible.
 - **Website Copywriting Standards (Eliminating Em Dashes):** Established a strong copywriting preference against using em dashes (`—`) across all user-facing website content (headlines, section titles, subheadings, feature bullets, paragraphs, testimonials, CTAs, navigation, metadata) in favor of natural sentence structure, commas, prepositions, or distinct sentences.
