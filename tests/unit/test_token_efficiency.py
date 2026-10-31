@@ -17,7 +17,7 @@ def analyzer():
 
 def test_all_skill_metadata_is_valid(loaded_registry: Registry):
     skills = loaded_registry.list_skills()
-    assert len(skills) == 14
+    assert len(skills) == 15
 
     for s in skills:
         assert s.id
@@ -28,7 +28,7 @@ def test_all_skill_metadata_is_valid(loaded_registry: Registry):
 
 def test_skill_descriptions_remain_concise(analyzer: SkillAnalyzer):
     cat_report = analyzer.analyze_catalogue()
-    assert cat_report.skills_count == 14
+    assert cat_report.skills_count == 15
 
     for skill in cat_report.skills:
         # Frontmatter descriptions must be concise (<= 200 chars and <= 35 words)
@@ -106,10 +106,10 @@ def test_duplicate_instructions_are_minimized(analyzer: SkillAnalyzer):
 
 def test_tes_analyze_produces_accurate_reports(analyzer: SkillAnalyzer):
     cat_report = analyzer.analyze_catalogue()
-    assert cat_report.skills_count == 14
+    assert cat_report.skills_count == 15
     assert cat_report.total_skill_md_words > 0
     assert cat_report.total_skill_md_tokens > 0
-    assert cat_report.total_reference_files == 49
+    assert cat_report.total_reference_files == 63
     assert cat_report.tokenizer_method in {"tiktoken (cl100k_base)", "heuristic (~4 characters per token)"}
 
     md_report = analyzer.generate_report_markdown(cat_report)

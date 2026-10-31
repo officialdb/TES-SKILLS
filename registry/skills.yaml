@@ -26,6 +26,15 @@ skills:
     tags: [clean-code, implementation, refactoring, error-handling, dependencies]
     compatibility: [hermes, opencode, codex, claude-code, gemini-cli, generic]
 
+  - id: backend-engineering
+    name: Backend Engineering
+    version: 1.0.0
+    category: engineering
+    description: Production backend architecture, business services, API lifecycle, persistence integration, background tasks, and security boundaries.
+    path: skills/backend-engineering
+    tags: [backend, api, architecture, business-logic, persistence, security, services]
+    compatibility: [hermes, opencode, codex, claude-code, gemini-cli, generic]
+
   - id: code-review
     name: Code Review
     version: 1.0.0

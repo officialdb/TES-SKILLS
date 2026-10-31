@@ -51,7 +51,7 @@ def test_cli_doctor(runner: CliRunner):
 def test_cli_validate(runner: CliRunner):
     result = runner.invoke(app, ["validate"])
     assert result.exit_code == 0
-    assert "All 14 skill package(s) passed validation" in result.output
+    assert "All 15 skill package(s) passed validation" in result.output
 
 
 def test_cli_analyze(runner: CliRunner):
@@ -59,7 +59,7 @@ def test_cli_analyze(runner: CliRunner):
     assert result.exit_code == 0
     assert "TES Skill Catalogue Analysis" in result.output
     assert "Token Efficiency Summary" in result.output
-    assert "14 skills" in result.output
+    assert "15 skills" in result.output
 
 
 def test_cli_analyze_skill_and_bundle(runner: CliRunner):
