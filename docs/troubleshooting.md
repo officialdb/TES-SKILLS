@@ -164,3 +164,4 @@ tes update --target opencode --scope global --preview
 # 2. Apply updates
 tes update --target opencode --scope global
 ```
+

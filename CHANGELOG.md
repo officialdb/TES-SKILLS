@@ -7,6 +7,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.2.2] - 2026-10-31
 
+### Enhanced - Frontend Design Knowledge Base & Component Library Ecosystems (v1.2.0)
+- **Skill Version Increments:** Incremented `ui-ux-standards` and `frontend-quality` to `1.2.0` in the registry and frontmatter.
+- **Dashboard Design & Information Architecture (`ui-ux-standards`):**
+  - Extracted reusable design principles from Reference A (HR Management Dashboard "Githr"): persistent sidebar layouts, contextual header action clusters, 3-column workspace grids, information density with subtle 1px container borders, scannable data metrics, and purposeful accent restraint (purple).
+  - Added reference manual `references/dashboard-design-principles.md` and updated `checklists/ui-ux-review-checklist.md`.
+- **Landing Page Design & Visual Storytelling (`ui-ux-standards`):**
+  - Extracted reusable design principles from Reference B (Minimalist Finance SaaS Landing Page "Zubaz"): centered editorial serif hero typography, conversion action hierarchy (solid primary CTA vs outlined secondary), product-led visual showcases (realistic mobile interface mockup, benefit outcome pills), and whitespace discipline.
+  - Added reference manual `references/landing-page-design-principles.md`.
+- **Component Library Design Guidelines (`ui-ux-standards`):**
+  - Established standards for component library brand independence: treating libraries as implementation resources rather than design templates, customizing foundation tokens, preserving visual consistency, and prohibiting decorative blinking dots.
+  - Added reference manual `references/component-library-design-guidelines.md`.
+- **Frontend Component Library Selection & Integration (`frontend-quality`):**
+  - Established a 10-point evaluation checklist before introducing UI library dependencies.
+  - In-depth implementation guidance for `shadcn/ui` (locally owned code in `components/ui/`, Radix primitives, Tailwind CSS variables) and `Flowbite` (Tailwind plugin, dashboard and modal components).
+  - Decision framework for reusing vs customizing vs composing vs custom-building components, and documentation verification rules to prevent API hallucinations.
+  - Added reference manual `references/frontend-component-library-selection.md`.
+- **Dashboard Layout Implementation (`frontend-quality`):**
+  - Documented multi-column CSS Grid collapse mechanics (`xl:grid-cols-3` -> `md:grid-cols-2` -> `grid-cols-1`), sidebar collapse to compact rail or mobile off-canvas drawer, accessible SVG circular progress rings, accessible bar chart figures, and interval-cleaned digital timers.
+  - Added reference manual `references/dashboard-layout-implementation.md`.
+- **Landing Page Implementation & Core Web Vitals (`frontend-quality`):**
+  - Documented fluid clamp typography, horizontal scrollbar protection (`overflow-x: clip`), responsive product mockup containers eliminating CLS (<0.1), and hero asset preloading for LCP (<2.5s).
+  - Added reference manual `references/landing-page-implementation.md` and updated `checklists/frontend-performance-checklist.md`.
+
 ### Documentation - Beginner-Friendly Installation & Getting Started Guide
 - **README Quick Start Overhaul:** Structured the README to answer beginner questions in order: What is TES, prerequisites, installation methods, first-time verification, installing first skill/bundle, and agent usage.
 - **Canonical Repository URLs:** Updated all documentation and contribution guides to reference the canonical GitHub repository (`https://github.com/officialdb/TES-SKILLS.git`).

@@ -109,7 +109,7 @@ def test_tes_analyze_produces_accurate_reports(analyzer: SkillAnalyzer):
     assert cat_report.skills_count == 15
     assert cat_report.total_skill_md_words > 0
     assert cat_report.total_skill_md_tokens > 0
-    assert cat_report.total_reference_files == 66
+    assert cat_report.total_reference_files == 72
     assert cat_report.tokenizer_method in {"tiktoken (cl100k_base)", "heuristic (~4 characters per token)"}
 
     md_report = analyzer.generate_report_markdown(cat_report)

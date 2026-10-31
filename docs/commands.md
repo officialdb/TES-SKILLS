@@ -246,3 +246,4 @@ tes analyze --report
 - `--skill`, `-s`: Analyze a specific skill.
 - `--bundle`, `-b`: Analyze all skills in a bundle.
 - `--report`, `-r`: Generate a comprehensive markdown report.
+

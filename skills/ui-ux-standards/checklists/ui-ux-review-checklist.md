@@ -12,4 +12,7 @@
 - [ ] Are focus rings clearly visible when tabbing through controls?
 - [ ] Has the layout been verified across mobile (375px), tablet (768px), and desktop?
 - [ ] Does navigation adapt cleanly between desktop links and an accessible mobile hamburger menu without horizontal overflow?
+- [ ] Are dashboard widgets grouped cleanly into structured card containers with consistent padding and subtle borders?
+- [ ] Does the landing page feature clear editorial typography, a single dominant primary CTA, and product-led visual proof without decorative noise?
+- [ ] Are component library elements customized to match the project's brand tokens rather than relying on default library themes?
 - [ ] Do animations respect `@media (prefers-reduced-motion: reduce)`?
