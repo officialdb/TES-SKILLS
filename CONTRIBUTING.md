@@ -6,8 +6,8 @@ Thank you for your interest in contributing to Techpronnet Engineering Skills (T
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/techpronnet/techpronnet-engineering-skills.git
-   cd techpronnet-engineering-skills
+   git clone https://github.com/officialdb/TES-SKILLS.git
+   cd TES-SKILLS
    ```
 
 2. Create a virtual environment or use existing Python 3.10+:
