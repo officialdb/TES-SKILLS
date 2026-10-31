@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.2.2] - 2026-10-31
 
+### Documentation - Beginner-Friendly Installation & Getting Started Guide
+- **README Quick Start Overhaul:** Structured the README to answer beginner questions in order: What is TES, prerequisites, installation methods, first-time verification, installing first skill/bundle, and agent usage.
+- **Canonical Repository URLs:** Updated all documentation and contribution guides to reference the canonical GitHub repository (`https://github.com/officialdb/TES-SKILLS.git`).
+- **Verified Installation Instructions:** Replaced unverified PyPI claims with tested, copy-and-paste commands using `uv tool install git+...`, `pipx install git+...`, and source installations.
+- **Dedicated Getting Started Guide (`docs/getting-started.md`):** Detailed walkthrough of the TES mental model, 4-step quickstart, how skills work under the hood, and tips for getting the best results from AI coding agents.
+- **Practical Prompt Library (`docs/prompt-library.md`):** Curated 10 copy-and-paste prompts for project understanding, feature development, backend engineering, frontend/UI, database review, security audits, code reviews, testing, production readiness, and refactoring, plus a universal prompt template.
+- **Complete CLI Reference (`docs/commands.md`):** In-depth reference for all 11 `tes` CLI commands, flags, and options with realistic examples.
+- **Beginner Troubleshooting Guide (`docs/troubleshooting.md`):** Practical solutions for `tes: command not found` PATH issues, Python version checks, environment discovery, scope differences, and agent cache reloading.
+
 ### Enhanced - Responsive Navigation & Mobile Hamburger Menus (v1.1.0)
 - **Skill Version Increments:** Incremented `ui-ux-standards` and `frontend-quality` to `1.1.0` in the registry and frontmatter.
 - **Responsive Navigation Design (`ui-ux-standards`):**
