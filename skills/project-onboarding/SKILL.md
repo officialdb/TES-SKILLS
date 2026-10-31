@@ -1,6 +1,6 @@
 ---
 name: project-onboarding
-description: Rapid comprehension and mapping of unknown codebases, dependency configurations, frameworks, test setups, and conventions without disruption. Trigger when encountering a new codebase, joining an existing project, or producing initial architecture summaries.
+description: Rapid reconnaissance and mapping of unfamiliar codebases, dependency configurations, and conventions without disruption. Use when exploring new repositories.
 compatibility:
   - hermes
   - opencode
@@ -12,47 +12,56 @@ compatibility:
 
 # Project Onboarding
 
-## Purpose
+## Purpose & Activation
 `project-onboarding` teaches agents how to rapidly explore, map, and comprehend unfamiliar repositories without disrupting existing code or making unfounded assumptions.
+
+- **Primary Skill For:** Exploring unfamiliar codebases, mapping architectural topology, identifying dependencies, and establishing baseline verification commands.
+- **Composition:** Pair with `engineering-core` when onboarding directly precedes making code modifications.
+- **Ownership Boundary:** Storing persistent architectural records belongs to `engineering-memory`.
 
 ---
 
 ## 1. Onboarding Reconnaissance Protocol
 
-Perform systematic reconnaissance in 5 stages:
+Execute systematic reconnaissance in 5 non-destructive stages:
 
 ```
-[1. Topology & Manifests] -> [2. Runtimes & Dependencies] -> [3. Build & Test Harnesses]
-                                                                     |
-                                                                     v
-                                     [5. Onboarding Dossier] <- [4. Architecture & Entry Points]
+[1. Topology & Manifests] -> [2. Runtimes & Dependencies] -> [3. Build & Test Harnesses] -> [4. Entry Points & Seams] -> [5. Architecture Synthesis]
 ```
 
-### Stage 1: Directory Topology
-- Scan root directories. Ignore noisy folders (`node_modules`, `.git`, `__pycache__`, `venv`, `dist`, `build`).
-- Identify documentation roots (`docs/`, `README.md`, `ARCHITECTURE.md`, `.engineering/`).
-
-### Stage 2: Runtimes & Package Managers
-- Identify package manifests (`pyproject.toml`, `package.json`, `go.mod`, `Cargo.toml`).
-- Read runtime engine versions (e.g. `.nvmrc`, `.python-version`, Dockerfile).
-
-### Stage 3: Test and Quality Harness
-- Locate test runner configs (`pytest.ini`, `jest.config.js`, `Makefile`).
-- Run dry-run or quick test commands to verify test baseline.
-
-### Stage 4: Entry Points & Key Data Flows
-- Locate application entry points (`main.py`, `src/index.ts`, `cmd/server/main.go`).
-- Trace request flow: Route -> Handler -> Service/Domain -> Repository -> Database.
-
-### Stage 5: Security & Infrastructure
-- Review `.env.example` or deployment descriptors for external dependencies (Redis, Postgres, S3).
+1. **Topology & Manifests:**
+   - Inspect directory structure and root manifests (`pyproject.toml`, `package.json`, `go.mod`, `Cargo.toml`).
+   - Identify version control conventions and git history recency (`git log -n 5 --oneline`).
+2. **Runtimes & Dependencies:**
+   - Identify runtime versions and package managers.
+   - Review direct dependencies and note major frameworks (e.g. FastAPI, Next.js, Django, Actix).
+3. **Build & Test Tooling:**
+   - Locate test frameworks, test directories, and CI pipeline configurations.
+   - Run the baseline test suite in a read-only manner to verify passing status.
+4. **Entry Points & Critical Seams:**
+   - Locate application entry points (CLI entrypoints, web servers, background task queues).
+   - Trace core data flow from ingress through service logic to persistence.
+5. **Documentation & Memory:**
+   - Review `README.md`, `ARCHITECTURE.md`, or `.engineering/` to capture known team conventions.
 
 ---
 
-## 2. Deliverables & Outputs
-Produce an initial **Project Onboarding Dossier**:
-1. **Core Purpose:** 1-sentence product summary.
-2. **Tech Stack:** Languages, frameworks, primary database, caching layer.
-3. **Run Commands:** How to install, run locally, test, and lint.
-4. **Critical Modules:** Map of core packages and their responsibilities.
-5. **Key Invariants & Gotchas:** Non-standard conventions or known constraints.
+## 2. Reconnaissance Guardrails
+- **Strictly Read-Only:** Do not reformat code, add dependencies, or commit files during the onboarding phase.
+- **Preserve Conventions:** Note established idioms (typing, error handling, formatting) so subsequent work conforms naturally.
+
+---
+
+## 3. Expected Deliverables
+1. **System Overview Summary:** High-level architectural map describing modules, data flows, and runtime tech stack.
+2. **Operational Commands:** Verified commands for building, running, and testing the project.
+3. **Key Seam Identification:** Pinpointed locations of core business logic, database models, and API boundaries.
+
+---
+
+## 4. Progressive Disclosure (Reference Documents)
+Consult these bundled documents only when specific deep guidance is needed:
+
+- **Common repository archetypes and layouts:** Consult [repo-archetypes.md](references/repo-archetypes.md).
+- **Comprehensive onboarding checklist:** Consult [onboarding-checklist.md](checklists/onboarding-checklist.md).
+- **System overview report template:** Consult [system-overview-template.md](templates/system-overview-template.md).

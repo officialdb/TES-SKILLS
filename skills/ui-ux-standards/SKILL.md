@@ -1,6 +1,6 @@
 ---
 name: ui-ux-standards
-description: Professional, restrained, accessible interface design with clear hierarchy, purposeful color, clean typography, and WCAG compliance. Trigger when designing web interfaces, creating UI components, styling layouts, reviewing UX flows, or ensuring accessibility.
+description: Professional, accessible interface design with clear visual hierarchy, purposeful color, clean typography, and WCAG compliance. Use for UI/UX work.
 compatibility:
   - hermes
   - opencode
@@ -12,47 +12,53 @@ compatibility:
 
 # UI/UX Standards
 
-## Purpose
+## Purpose & Activation
 `ui-ux-standards` guides coding agents in designing and implementing professional, clean, accessible, and delightful digital user interfaces. It emphasizes restraint, typography, whitespace, purposeful color, and accessibility over noisy decorative fads.
+
+- **Primary Skill For:** Designing user interfaces, defining visual styles, styling layouts, polishing component aesthetics, and ensuring accessibility compliance.
+- **Composition:** Pair with `frontend-quality` when translating UI specs into high-performance web components.
+- **Ownership Boundary:** Core Web Vitals and frontend runtime performance belong to `frontend-quality`.
 
 ---
 
 ## 1. Design Philosophy: Restraint & Clarity
 
-### What We Prioritize
-1. **Clear Visual Hierarchy:** Primary actions, secondary actions, and informational content must be instantly distinguishable through size, weight, and position.
-2. **Clean Typography:** Legible type scales with comfortable line heights (`leading-relaxed`), proper font tracking, and optical sizing.
-3. **Purposeful Use of Color:** Neutral canvas with high-contrast, deliberate accent colors for focus, calls-to-action, and status feedback (success, warning, destructive).
-4. **Functional Spacing & Rhythm:** Generous, consistent spacing system (4px / 8px grid). Spacing creates breathing room and communicates visual grouping.
-5. **Universal Accessibility (WCAG 2.1 AA):** High contrast ratios (>= 4.5:1 for normal text, >= 3:1 for large text), visible focus rings, ARIA landmarks, and keyboard navigability.
-
-### What to Avoid
-- **No Electric / Neon Colors:** Avoid eye-straining fluorescent neons, intense saturated glows, and chaotic rainbow palettes.
-- **No Gratuitous Gradients:** Avoid heavy multicolor background gradients that reduce readability and look dated.
-- **No Excessive Cardification:** Do not wrap every single paragraph or metric in its own heavy, rounded border card. Use clean typography and spacing instead.
-- **No Hyper-Rounded Containers:** Avoid bloated pill borders (`rounded-3xl` on everything) that waste screen real estate.
-- **No Unnecessary Animations:** Motion should be subtle, quick (150ms-250ms), purposeful, and respect `prefers-reduced-motion`. Never delay user interaction with decorative entrance animations.
-
----
-
-## 2. Standard Design System Foundations
-
-### Typography Scales
-- **Display / H1:** 32px–40px (Bold/SemiBold, tight tracking, line-height 1.1–1.2)
-- **H2:** 24px–28px (SemiBold, line-height 1.25)
-- **H3:** 18px–20px (Medium/SemiBold, line-height 1.3)
-- **Body:** 14px–16px (Regular, line-height 1.5–1.6)
-- **Caption / Meta:** 12px–13px (Regular/Medium, line-height 1.4, subtle muted color)
-
-### Color Palette Strategy
-- **Backgrounds:** Clean, neutral light canvas (`#FFFFFF`, `#F9FAFB`) with crisp borders (`#E5E7EB`). Dark mode surfaces should use subtle neutral zinc/slate rather than pure black.
-- **Text:** High contrast primary text (`#111827`), secondary muted text (`#4B5563`).
-- **Brand / Primary Accent:** One cohesive primary hue (e.g. deep navy, refined royal blue, forest green, warm charcoal) used deliberately.
-- **Semantic Feedback:** Emerald for success, Amber for warning, Crimson for error, Sky for informational.
+1. **Clear Visual Hierarchy:**
+   - Establish unambiguous visual priority: primary actions, secondary options, and background information must be instantly distinguishable through size, weight, and position.
+   - Limit each view or card to one primary call-to-action (CTA).
+2. **Disciplined Typography:**
+   - Use a disciplined typographic scale with comfortable line heights (`leading-relaxed` for body, `leading-tight` for headings).
+   - Maintain readable line lengths (45–75 characters per line for prose).
+3. **Purposeful Color System:**
+   - Build upon neutral, muted backgrounds (slate, zinc, or gray).
+   - Reserve vibrant accent colors strictly for interactive focus, primary actions, and semantic state indicators (success, warning, destructive).
+4. **Spatial Discipline:**
+   - Base all margins, paddings, and component sizes on a strict 4px / 8px spatial grid.
+   - Use generous whitespace to separate distinct cognitive sections rather than cluttering views with heavy divider lines.
 
 ---
 
-## 3. Deliverables & Outputs
-1. **Accessible UI Components:** Accessible HTML/CSS/Tailwind implementations with semantic tags and keyboard support.
-2. **Responsive Verification:** Layouts tested across mobile (375px), tablet (768px), and desktop (1280px+).
-3. **Contrast & Accessibility Audit:** Color contrast ratios and ARIA annotations.
+## 2. Accessibility & Universal Usability (WCAG 2.1 AA)
+
+- **Color Contrast:** Ensure text achieves a minimum contrast ratio of 4.5:1 against its background (3:1 for large text 18pt+). Never convey critical status by color alone.
+- **Keyboard Navigation:** Every interactive element must be reachable and operable via keyboard (`Tab`, `Shift+Tab`, `Enter`, `Space`).
+- **Focus Indicators:** Never remove focus rings (`outline: none`) without providing an equally visible custom focus outline.
+- **Semantic HTML:** Use native elements (`<button>`, `<a>`, `<nav>`, `<main>`) rather than `<div>` with click listeners.
+- **Motion Restraint:** Honor `@media (prefers-reduced-motion: reduce)` by disabling non-essential transitions and parallax animations.
+
+---
+
+## 3. Expected Deliverables
+1. **Polished UI Components:** Accessible, beautifully spaced, responsive interface code.
+2. **Design Specification:** Clear design tokens (typography, color, spacing) matching existing systems.
+3. **Accessibility Sign-off:** Verification of keyboard navigation, screen reader labels, and contrast compliance.
+
+---
+
+## 4. Progressive Disclosure (Reference Documents)
+Consult these bundled documents only when specific deep guidance is needed:
+
+- **WCAG 2.1 AA accessibility guidelines:** Consult [accessibility-wcag.md](references/accessibility-wcag.md).
+- **Visual design foundations and tokens:** Consult [visual-design-principles.md](references/visual-design-principles.md).
+- **UI/UX inspection checklist:** Consult [ui-ux-review-checklist.md](checklists/ui-ux-review-checklist.md).
+- **Design specification template:** Consult [design-spec-template.md](templates/design-spec-template.md).

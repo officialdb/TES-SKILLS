@@ -1,6 +1,6 @@
 ---
 name: engineering-memory
-description: Local-first, offline project memory system using structured markdown (.engineering/) for architecture decisions, lessons, and standards. Trigger when recording technical decisions, capturing lessons learned, establishing project standards, or reading project memory.
+description: Local-first, offline project memory system using structured markdown (.engineering/) for architecture decisions and lessons. Use when recording or recalling project knowledge.
 compatibility:
   - hermes
   - opencode
@@ -12,64 +12,65 @@ compatibility:
 
 # Engineering Memory
 
-## Purpose
-`engineering-memory` establishes a persistent, local-first, offline engineering memory system for software projects. It requires no cloud database, vector store, or proprietary API — operating entirely via structured Markdown files located inside `.engineering/` in the project root.
+## Purpose & Activation
+`engineering-memory` establishes a persistent, local-first, offline engineering memory system using structured Markdown files inside `.engineering/`. It requires no external cloud databases, vector stores, or APIs.
+
+- **Primary Skill For:** Recording Architectural Decision Records (ADRs), capturing lessons learned from hard bugs, and retrieving project-specific conventions.
+- **Composition:** Combine with any implementation skill when an architectural pivot occurs or durable lessons need recording.
+- **Cardinal Rule: Selective Retrieval:** Never load all `.engineering/` files at startup. Load only the specific document relevant to the immediate task.
 
 ---
 
 ## 1. Directory Structure
 
 ```text
-project-root/
-└── .engineering/
-    ├── project-profile.md        # Core identity, mission, tech stack, and primary URLs
-    ├── architecture.md           # High-level architecture, module boundaries, data flows
-    ├── engineering-standards.md  # Code style, testing rules, typing, PR conventions
-    ├── design-standards.md       # Visual philosophy, typography, spacing, UI tokens
-    ├── security-profile.md       # Trust boundaries, auth patterns, known sensitive areas
-    ├── decisions/                # Architectural Decision Records (ADRs)
-    │   └── ADR-0001-init.md
-    ├── lessons/                  # Retrospectives and learned invariants from past bugs
-    │   └── LESSON-001.md
-    └── tasks/                    # Active task specifications and historical milestones
+.engineering/
+├── project-profile.md        # Core identity, stack, repository URLs, and conventions
+├── architecture.md           # High-level architecture, module boundaries, data flows
+├── engineering-standards.md  # Code conventions, testing policy, PR standards
+├── design-standards.md       # Visual direction, typography, design tokens
+├── security-profile.md       # Trust boundaries, auth patterns, sensitive areas
+├── decisions/                # Architectural Decision Records (ADR-0001-*.md)
+├── lessons/                  # Learned invariants from past bugs (LESSON-001.md)
+└── tasks/                    # Active task specifications and historical milestones
 ```
 
 ---
 
-## 2. Memory Ingestion & Updating Workflow
+## 2. Selective Retrieval Protocol
+Agents must load knowledge selectively to conserve context tokens:
 
-```
-[Agent Reads .engineering/ at Startup]
-                  |
-                  v
-[Execute Development Work Within Established Constraints]
-                  |
-                  v
-[Identify Significant Architectural Decision or Hard Bug Lesson]
-                  |
-                  v
-[Record Atomic Markdown Record in decisions/ or lessons/]
-                  |
-                  v
-[Commit to Version Control alongside Code]
-```
-
-### Protocol for Recording Memories:
-1. **Never Store Secrets:** Do not commit passwords, API keys, private tokens, or personal identifiers into `.engineering/`.
-2. **Distinguish Policy from Temporary Context:** Only record durable engineering standards, architectural decisions, and repeatable lessons. Do not record temporary scratchpad output as permanent policy.
-3. **Include Date and Context:** Always document the date, deciders, problem context, and rationale.
+1. **Project Profile:** Read `project-profile.md` only when initial project context or repository identity is needed.
+2. **Architecture:** Read `architecture.md` only when architectural, modular, or cross-service integration changes are involved.
+3. **Security Profile:** Read `security-profile.md` only when touching authentication, secrets, or sensitive boundaries.
+4. **Design Standards:** Read `design-standards.md` only for interface, styling, or UX component work.
+5. **Decisions & Lessons:** Read specific files in `decisions/` or `lessons/` only when relevant to the subsystem being modified.
+6. **Task Histories:** Do not load completed task logs from `tasks/` unless explicitly requested.
+7. **Context Deduplication:** Do not re-read memory files if their contents are already present in the active conversation context.
 
 ---
 
-## 3. Initializing Engineering Memory
+## 3. Protocol for Recording Memories
 
-To initialize `.engineering/` in the current project, agents or developers can run the bundled initialization script:
-```bash
-python scripts/init_memory.py [PROJECT_DIR]
-```
+1. **No Secrets:** Never commit API keys, tokens, passwords, or personal data into `.engineering/`.
+2. **Durable Knowledge Only:** Record durable policies, architecture choices, and bug invariants. Do not save temporary scratchpad output as permanent policy.
+3. **Structured Attribution:** Always include the date, author, context, evaluated alternatives, and consequences.
+4. **Version Control:** Commit `.engineering/` updates alongside the corresponding code changes in Git.
 
 ---
 
-## 4. Deliverables & Outputs
-1. **Durable Knowledge Records:** Version-controlled Markdown documentation preserving team knowledge across agent sessions.
-2. **Zero External Dependencies:** 100% offline and searchable via standard file inspection tools.
+## 4. Expected Deliverables
+1. **Durable Knowledge Records:** Version-controlled Markdown files in `.engineering/decisions/` or `.engineering/lessons/`.
+2. **Project Profile Setup:** Initialized `.engineering/` workspace via `python scripts/init_memory.py [DIR]`.
+
+---
+
+## 5. Progressive Disclosure (Reference Documents)
+Consult these bundled documents only when specific deep guidance is needed:
+
+- **Offline memory protocol details:** Consult [offline-memory-protocol.md](references/offline-memory-protocol.md).
+- **Memory hygiene checklist:** Consult [memory-hygiene-checklist.md](checklists/memory-hygiene-checklist.md).
+- **ADR template:** Consult [decision.md](templates/decision.md).
+- **Bug retrospective template:** Consult [lesson.md](templates/lesson.md).
+- **Project profile template:** Consult [project-profile.md](templates/project-profile.md).
+- **Workspace initializer script:** Available at `scripts/init_memory.py`.

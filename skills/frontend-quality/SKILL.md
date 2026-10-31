@@ -1,6 +1,6 @@
 ---
 name: frontend-quality
-description: Modern frontend architecture, responsive resilience, Core Web Vitals performance, component composition, and state predictability. Trigger when developing frontend web applications, optimizing rendering performance, refactoring components, or debugging layout shifts.
+description: Frontend architecture, Core Web Vitals optimization, responsive layout resilience, and state predictability. Use when building or optimizing web interfaces.
 compatibility:
   - hermes
   - opencode
@@ -12,41 +12,49 @@ compatibility:
 
 # Frontend Quality
 
-## Purpose
-`frontend-quality` provides agents with engineering standards for building fast, maintainable, responsive, and resilient frontend applications. It emphasizes predictable state management, Core Web Vitals optimization, and component composition.
+## Purpose & Activation
+`frontend-quality` provides agents with engineering standards for building fast, maintainable, responsive, and resilient frontend web applications. It emphasizes predictable state management, Core Web Vitals optimization, and component composition.
+
+- **Primary Skill For:** Implementing frontend components, improving page load speeds, debugging layout shifts, and optimizing interactive responsiveness.
+- **Composition:** Pair with `ui-ux-standards` when designing new visual components or refining user flows.
+- **Ownership Boundary:** Typography scale, color palettes, and WCAG accessibility standards belong to `ui-ux-standards`.
 
 ---
 
-## 1. Core Web Vitals & Performance Engineering
+## 1. Core Web Vitals & Performance Targets
 
-Target thresholds for production web applications:
-
-| Metric | Target (Good) | Description | Primary Optimizations |
+| Metric | Target (Good) | Description | Key Optimizations |
 |---|---|---|---|
-| **LCP** (Largest Contentful Paint) | **<= 2.5s** | Loading speed of main visual content | Compress images (WebP/AVIF), preload hero assets, SSR |
-| **INP** (Interaction to Next Paint) | **<= 200ms** | Responsiveness to user input/clicks | Debounce expensive handlers, yield to main thread, avoid long tasks |
-| **CLS** (Cumulative Layout Shift) | **<= 0.1** | Visual stability during render | Explicit aspect ratios on images/videos, reserve skeleton dimensions |
+| **LCP** (Largest Contentful Paint) | < 2.5s | Time until main hero content is rendered | Preload hero images, optimize webfonts, server-render critical markup |
+| **INP** (Interaction to Next Paint) | < 200ms | Latency of page responsiveness to user inputs | Yield main thread, debounce input handlers, avoid long JavaScript tasks |
+| **CLS** (Cumulative Layout Shift) | < 0.1 | Unexpected layout shifts during rendering | Explicit `width`/`height` on images and embeds, reserve space for dynamic content |
 
 ---
 
-## 2. Component Architecture Principles
+## 2. Frontend Architecture Standards
 
-1. **Unidirectional Data Flow & State Locality:**
-   - Keep state as close to where it is used as possible. Do not lift state into global stores unless shared across distant modules.
-   - Separate stateful container components from pure, presentational UI primitives.
-
-2. **Error Boundaries & Graceful Degradation:**
-   - Wrap risky widget components (charts, third-party embeds) in React/framework Error Boundaries to prevent a local failure from crashing the entire page.
-
+1. **Predictable State Management:**
+   - Maintain a single source of truth for UI state. Avoid synchronizing state across multiple independent stores.
+   - Keep state local to the components that need it; lift state up only when siblings share data.
+2. **Component Composition:**
+   - Design small, focused components with explicit props and strong TypeScript typing.
+   - Separate presentational components from stateful data-fetching containers.
 3. **Responsive Resilience:**
-   - Test layout integrity on mobile viewports (320px–375px), avoiding text overflow, horizontal scroll leaks, and touch targets smaller than 44x44px.
-
-4. **Bundle & Asset Hygiene:**
-   - Use dynamic imports / code-splitting for heavy routes and third-party visualization libraries.
-   - Avoid importing entire utility libraries when only a single function is needed.
+   - Build mobile-first. Ensure layouts adapt seamlessly from 320px mobile viewports to ultra-wide displays without horizontal scrolling.
+   - Handle edge-case content gracefully: empty states, long unbreakable strings, missing avatars, and network error banners.
 
 ---
 
-## 3. Deliverables & Outputs
-1. **High-Performance Components:** Typed, modular UI code with minimal re-renders.
-2. **Performance Audit:** Measurement of bundle size, layout shift prevention, and response times.
+## 3. Expected Deliverables
+1. **Quality Frontend Code:** Clean, typed component implementations without layout shift bugs.
+2. **Performance Audit:** Verification that bundle sizes and Core Web Vitals fall within budget.
+3. **Responsive Verification:** Evidence of verified layout integrity across mobile, tablet, and desktop breakpoints.
+
+---
+
+## 4. Progressive Disclosure (Reference Documents)
+Consult these bundled documents only when specific deep guidance is needed:
+
+- **Core Web Vitals deep-dive and diagnostics:** Consult [core-web-vitals.md](references/core-web-vitals.md).
+- **Frontend performance verification:** Consult [frontend-performance-checklist.md](checklists/frontend-performance-checklist.md).
+- **Performance audit report template:** Consult [frontend-audit-report.md](templates/frontend-audit-report.md).

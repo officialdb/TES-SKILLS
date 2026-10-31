@@ -1,6 +1,6 @@
 ---
 name: code-review
-description: Dual-axis code review evaluating repository standards compliance and specification alignment with constructive, actionable feedback. Trigger when reviewing pull requests, auditing code diffs, or validating changes before merge.
+description: Dual-axis code review evaluating repository standards compliance and specification alignment with actionable feedback. Use when reviewing pull requests or diffs.
 compatibility:
   - hermes
   - opencode
@@ -12,57 +12,63 @@ compatibility:
 
 # Code Review
 
-## Purpose
-`code-review` conducts dual-axis evaluations of pull requests, commits, and diffs. It separates code review into two distinct, rigorous investigations:
-1. **Standards Compliance:** Does the diff follow the repository's established conventions, types, architecture, tests, and formatting?
-2. **Specification Alignment:** Does the diff accurately and completely satisfy the originating issue, acceptance criteria, and user story?
+## Purpose & Activation
+`code-review` conducts dual-axis evaluations of pull requests, commits, and diffs. It separates code review into two distinct, rigorous investigations: standards compliance and specification alignment.
+
+- **Primary Skill For:** Reviewing incoming pull requests, inspecting code diffs, evaluating patch safety, and verifying criteria completion.
+- **Composition:** Pair with `security-audit` when reviewing security-critical changes or user-data processing.
+- **Ownership Boundary:** Authoring original implementation code belongs to `software-engineering`.
 
 ---
 
 ## 1. The Dual-Axis Review Methodology
 
 ```
-                       [Incoming Code Diff]
-                                |
-             +------------------+------------------+
-             |                                     |
-             v                                     v
-   [Axis 1: Standards]                    [Axis 2: Specification]
-   - Coding conventions                  - Solves originating issue
-   - Type safety & tests                 - Acceptance criteria met
-   - Security & error handling           - Edge cases accounted for
-   - Architectural boundaries            - No accidental regressions
-             |                                     |
-             +------------------+------------------+
-                                |
-                                v
-               [Consolidated Review Deliverable]
+                          [Incoming Code Diff]
+                                   |
+                  +----------------+----------------+
+                  |                                 |
+                  v                                 v
+      [Axis 1: Standards Compliance]     [Axis 2: Specification Alignment]
+      • Idioms and patterns              • Acceptance criteria fulfilled
+      • Static types & linting           • Edge cases addressed
+      • Error handling & tests           • Backward compatibility preserved
+                  |                                 |
+                  +----------------+----------------+
+                                   |
+                                   v
+             [Actionable Review Report & Clear Verdict]
 ```
 
----
-
-## 2. Review Workflow
-
-### Phase 1: Baseline Context
-- Read the originating issue, ticket, or task prompt to establish the **Ground Truth Specification**.
-- Inspect project conventions (`CONTRIBUTING.md`, linter configs, existing codebase patterns).
-
-### Phase 2: Axis 1 Evaluation (Standards & Health)
-- **Architecture:** Does the change respect module boundaries? Are abstractions deep rather than shallow?
-- **Code Quality:** Are edge cases handled? Are exceptions caught specifically?
-- **Testing:** Are new tests provided? Do all tests pass?
-- **Security:** Does the code introduce injection sinks, hardcoded secrets, or insecure auth?
-
-### Phase 3: Axis 2 Evaluation (Specification Fulfillment)
-- Did the author fulfill every requirement stated in the spec?
-- Did the author introduce unintended side effects, scope creep, or omit requested functionality?
+1. **Axis 1: Standards Compliance (Internal Hygiene):**
+   - Does the diff adhere to the repository's established conventions, naming idioms, and formatting?
+   - Are static types complete and verified by the compiler or type checker?
+   - Are errors handled explicitly without swallowing exceptions?
+   - Are new code paths accompanied by automated tests?
+2. **Axis 2: Specification Alignment (External Correctness):**
+   - Does the change directly satisfy the user requirement or originating issue?
+   - Does it preserve existing public contracts and avoid breaking backward compatibility?
+   - Does it introduce unintended performance regressions or memory leaks?
 
 ---
 
-## 3. Constructive Feedback Standards
-- Formulate comments constructively: explain *why* an issue matters, not merely *what* is wrong.
-- Provide concrete replacement snippets whenever requesting changes.
-- Categorize comments using clear severity prefixes:
-  - `[BLOCKING]`: Must be fixed before merge (correctness, security, data loss).
-  - `[RECOMMENDATION]`: Strongly advised improvement (readability, minor perf).
-  - `[NIT]`: Minor style, spelling, or non-blocking polish.
+## 2. Review Protocol & Tone
+- **Constructive & Specific:** Point directly to file paths and line numbers. Explain *why* a pattern is problematic and suggest a concrete, typed alternative.
+- **Clear Severity Labels:** Clearly separate **Blocking Issues** (correctness bugs, regressions, missing tests) from **Non-Blocking Suggestions** (idiomatic improvements, minor nits).
+- **Verify Test Evidence:** Confirm that tests pass and actually assert on the modified behaviors.
+
+---
+
+## 3. Expected Deliverables
+1. **Dual-Axis Review Report:** Structured feedback evaluating both standards compliance and specification alignment.
+2. **Actionable Suggestions:** Specific inline code replacements for identified issues.
+3. **Explicit Verdict:** Clear decision (Approve, Request Changes, or Comment).
+
+---
+
+## 4. Progressive Disclosure (Reference Documents)
+Consult these bundled documents only when specific deep guidance is needed:
+
+- **Dual-axis review model and principles:** Consult [dual-axis-review.md](references/dual-axis-review.md).
+- **PR review inspection checklist:** Consult [pr-review-checklist.md](checklists/pr-review-checklist.md).
+- **Structured review summary template:** Consult [code-review-template.md](templates/code-review-template.md).

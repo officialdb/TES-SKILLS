@@ -1,6 +1,6 @@
 ---
 name: deployment-verification
-description: Post-deployment smoke testing, canary health checks, synthetic transactions, zero-downtime rollback strategies, and cutover validation. Trigger when verifying a newly deployed application, running post-release smoke tests, validating staging environments, or testing rollbacks.
+description: Post-deployment smoke testing, canary verification, synthetic transactions, and rollback validation. Use when validating deployed releases or staging environments.
 compatibility:
   - hermes
   - opencode
@@ -12,57 +12,48 @@ compatibility:
 
 # Deployment Verification
 
-## Purpose
-`deployment-verification` teaches agents how to execute structured post-deployment health checks, canary verifications, synthetic transactions, and rollback validations to guarantee that releases are functioning correctly in target environments.
+## Purpose & Activation
+`deployment-verification` teaches agents to execute structured post-deployment health checks, canary validations, synthetic transactions, and rollback verifications to ensure releases function correctly in target environments.
+
+- **Primary Skill For:** Verifying freshly deployed applications, running post-release smoke tests, validating staging environments, and confirming rollback readiness.
+- **Composition:** Pair with `devops-engineering` as the final stage of an automated deployment pipeline.
+- **Ownership Boundary:** Authoring CI/CD pipelines and container builds belongs to `devops-engineering`.
 
 ---
 
 ## 1. Post-Deployment Verification Protocol
 
 ```
-[Deploy Execution]
-         |
-         v
-[Stage 1: Infrastructure & Service Liveness] -> (Ping /healthz, check container state)
-         |
-         v
-[Stage 2: Critical Path Smoke Tests]        -> (Synthetic user login, core API query)
-         |
-         v
-[Stage 3: Telemetry & Error Log Monitoring] -> (Error rate <0.1%, latency within budget)
-         |
-         +----------------------------------+
-         |                                  |
-    (Checks Pass)                     (Checks Fail)
-         |                                  |
-         v                                  v
-  [Sign-off Release]             [Trigger Immediate Rollback]
+[Deploy Execution] -> [Infrastructure Health] -> [Static Assets & SSL] -> [Synthetic Transactions] -> [Canary Analysis] -> [Sign-off / Rollback]
 ```
 
----
-
-## 2. Core Verification Techniques
-
-1. **Liveness & Readiness Probing:**
-   - Verify `/healthz` (service alive) and `/readyz` (database, cache, and dependent microservices reachable).
-
-2. **Synthetic End-to-End Transactions:**
-   - Execute non-destructive synthetic transactions (e.g. read an existing public item, test test-account authentication).
-   - Never inject polluting test data into production user accounts.
-
-3. **Telemetry & Log Scrubbing:**
-   - Monitor application logs for spike in 5xx HTTP codes or unhandled exceptions.
-   - Ensure logs never print API keys, user passwords, or confidential tokens.
-
-4. **Rollback Preparedness:**
-   - Every deployment must have a verified rollback path (e.g. previous Docker image tag or previous git release).
-   - If smoke tests fail, execute rollback before users encounter broad outage.
+1. **DNS & Transport:** Confirm target domain resolves and TLS/SSL certificate is valid and not expired.
+2. **HTTP Ingress & Assets:** Verify `/healthz` or status endpoint returns HTTP 200; verify core static asset bundles load with appropriate caching headers.
+3. **Database & Cache Connectivity:** Verify application reads and writes to backend datastores without timeout.
+4. **Synthetic User Flow:** Execute an automated synthetic transaction covering the primary user journey (e.g. login, query, item creation).
+5. **Telemetry & Error Budgets:** Monitor logs and error tracking for spike in HTTP 5xx errors or unhandled exceptions.
 
 ---
 
-## 3. Deliverables & Outputs
-Produce a **Deployment Verification Report**:
-1. **Target Environment:** Staging, Canary, or Production URL.
-2. **Release Version / Commit:** Deployed commit hash and tag.
-3. **Verification Results:** Liveness checks, smoke test outcomes, and latency metrics.
-4. **Final Status:** VERIFIED SUCCESS or ROLLBACK REQUIRED.
+## 2. Rollback Triggers & Safety
+- **Immediate Rollback Trigger:** Trigger automated or human-alerted rollback if:
+  - The health check endpoint fails consecutively for 60 seconds.
+  - HTTP 5xx error rate exceeds 1% of total requests.
+  - P99 latency degrades by more than 2x baseline.
+- **Data Safety:** Never execute destructive schema migrations without a verified zero-downtime rollback path.
+
+---
+
+## 3. Expected Deliverables
+1. **Verification Report:** Structured sign-off documenting each verification check and result.
+2. **Latency & Error Metrics:** Baseline measurements captured during the verification window.
+3. **Rollback Plan Status:** Confirmed active rollback path in case of post-cutover regression.
+
+---
+
+## 4. Progressive Disclosure (Reference Documents)
+Consult these bundled documents only when specific deep guidance is needed:
+
+- **Smoke testing patterns and canary analysis:** Consult [smoke-testing-patterns.md](references/smoke-testing-patterns.md).
+- **Post-deployment inspection checklist:** Consult [post-deployment-checklist.md](checklists/post-deployment-checklist.md).
+- **Formal verification report template:** Consult [deployment-verification-report.md](templates/deployment-verification-report.md).

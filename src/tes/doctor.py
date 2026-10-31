@@ -97,10 +97,11 @@ class Doctor:
 
         # 3. Check adapters write access & directories
         adapters = get_all_adapters()
+        target_root = root or Path.cwd()
         for adapter in adapters:
             for scope in [Scope.PROJECT, Scope.GLOBAL]:
                 try:
-                    status = adapter.validate_target(scope, root)
+                    status = adapter.validate_target(scope, target_root)
                     writable = status["writable"]
                     checks.append(
                         DoctorCheckItem(
@@ -127,7 +128,7 @@ class Doctor:
             python_version=py_ver,
             python_executable=sys.executable,
             platform_info=f"{platform.system()} {platform.release()}",
-            project_root=str(root),
+            project_root=str(root) if root else "None detected (global context)",
             checks=checks,
             issues_count=len(issues),
             all_healthy=len(issues) == 0

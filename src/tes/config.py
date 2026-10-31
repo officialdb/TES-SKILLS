@@ -6,31 +6,49 @@ from typing import Optional
 
 MANIFEST_FILE_NAME = ".tes-manifest.json"
 
+PROJECT_MARKERS = [
+    ".git",
+    "pyproject.toml",
+    "package.json",
+    "Cargo.toml",
+    "go.mod",
+    "composer.json",
+    "requirements.txt",
+]
+
 
 def get_user_home() -> Path:
     """Return user home directory."""
     return Path.home().resolve()
 
 
-def find_project_root(start_dir: Optional[Path] = None) -> Path:
+def find_project_root(start_dir: Optional[Path] = None, allow_home: bool = False) -> Optional[Path]:
     """Find the root of the current project by walking upwards.
     
-    Checks for markers like .git, pyproject.toml, package.json, or .tes-manifest.json.
-    Defaults to start_dir or current working directory if no root marker is found.
+    Checks for recognized project markers:
+    .git, pyproject.toml, package.json, Cargo.toml, go.mod, composer.json, requirements.txt.
+    
+    The user's home directory is never automatically classified as a project root.
+    Returns None if no project root marker is found.
     """
     current = (start_dir or Path.cwd()).resolve()
-    markers = [".git", "pyproject.toml", "package.json", "go.mod", "Cargo.toml", MANIFEST_FILE_NAME]
+    home = get_user_home()
 
     candidate = current
     while True:
-        for marker in markers:
+        # The home directory must not automatically be classified as a project
+        if candidate == home and not allow_home:
+            break
+
+        for marker in PROJECT_MARKERS:
             if (candidate / marker).exists():
                 return candidate
+
         if candidate.parent == candidate:
             break
         candidate = candidate.parent
 
-    return current
+    return None
 
 
 def get_tes_package_root() -> Path:

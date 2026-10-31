@@ -80,6 +80,11 @@ tes list
 # Validate skill packages for schema adherence and integrity
 tes validate
 
+# Analyze skill catalogue for token efficiency and progressive disclosure
+tes analyze
+tes analyze --skill security-audit
+tes analyze --report
+
 # Safe update with preview
 tes update engineering-core
 

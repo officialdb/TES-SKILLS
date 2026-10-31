@@ -1,6 +1,6 @@
 ---
 name: threat-modeling
-description: Structured STRIDE threat modeling, trust boundary identification, attack vector mapping, and defensive mitigation planning. Trigger when designing new system features, reviewing architectural changes, evaluating third-party integrations, or performing security risk assessments.
+description: Structured STRIDE threat modeling, trust boundary identification, and defensive mitigation planning. Use when evaluating system risks or architectural changes.
 compatibility:
   - hermes
   - opencode
@@ -12,60 +12,53 @@ compatibility:
 
 # Threat Modeling
 
-## Purpose
+## Purpose & Activation
 `threat-modeling` teaches agents how to systematically identify security threats, analyze attack surfaces, evaluate trust boundaries, and formulate mitigations using the STRIDE methodology.
+
+- **Primary Skill For:** Conducting architectural threat assessments, evaluating attack surfaces on new features, and designing mitigation roadmaps.
+- **Composition:** Pair with `system-architect` when reviewing new system designs; pair with `security-audit` when analyzing suspected attack vectors.
+- **Ownership Boundary:** Forensic code vulnerability assessment belongs to `security-audit`; secure coding implementation belongs to `secure-development`.
 
 ---
 
 ## 1. The STRIDE Framework
+Evaluate every system component, interface, and boundary crossing against the six threat categories:
 
-Evaluate every component and interface against the six core threat categories:
-
-| Threat | Security Property Violated | Example Scenario | Primary Defense |
+| Threat | Security Property Violated | Example Attack Scenario | Primary Defense |
 |---|---|---|---|
-| **S**poofing | Authenticity | Attacker impersonates another user or service | Strong authentication, mTLS, signed JWTs |
-| **T**ampering | Integrity | Attacker modifies data in transit or at rest | Cryptographic signatures, checksums, HMAC |
-| **R**epudiation | Non-repudiability | User denies performing an action | Tamper-evident audit logging |
-| **I**nformation Disclosure | Confidentiality | Sensitive data or secrets leaked to unauthorized parties | Encryption (TLS, AES-GCM), data redaction |
-| **D**enial of Service | Availability | System overwhelmed or crashed by malicious input | Rate limiting, timeouts, resource caps |
-| **E**levation of Privilege | Authorization | Unprivileged user gains administrator rights | Server-side RBAC, principle of least privilege |
+| **Spoofing** | Authenticity | An attacker impersonates a valid user or service | Strong authentication, cryptographic tokens, mTLS |
+| **Tampering** | Integrity | Data in transit or database state is unauthorizedly altered | Cryptographic signing, HMACs, TLS, input validation |
+| **Repudiation** | Non-Repudiation | A user denies performing an action without audit trail | Append-only audit logs, immutable log stores |
+| **Information Disclosure** | Confidentiality | Secrets, PII, or internal stack traces leak to clients | Encryption at rest and in transit, sanitized error responses |
+| **Denial of Service** | Availability | Flooding endpoints or consuming database connection pools | Rate limiting, circuit breakers, request timeouts |
+| **Elevation of Privilege** | Authorization | A standard user executes admin commands | Server-side RBAC, strict principle of least privilege |
 
 ---
 
 ## 2. Threat Modeling Workflow
 
 ```
-[1. Deconstruct the System]
-           |
-           v
-[2. Identify Trust Boundaries & Data Flows]
-           |
-           v
-[3. Enumerate Threats via STRIDE]
-           |
-           v
-[4. Score Risk & Formulate Mitigations]
-           |
-           v
-[5. Validate Mitigations in Implementation]
+[System Decomposition & Trust Boundaries] -> [Apply STRIDE to Crossings] -> [Score & Prioritize Risks] -> [Define Mitigations] -> [Convert to Verification Tests]
 ```
 
-### Step 1: Deconstruct System
-- Identify external entities (users, third-party APIs), processes (API servers, background workers), data stores (databases, caches), and data flows.
-
-### Step 2: Draw Trust Boundaries
-- Mark where data crosses from an untrusted zone (e.g. public Internet) to a trusted zone (e.g. internal VPC). Every crossing point requires authentication, authorization, and validation.
-
-### Step 3: Enumerate Threats
-- Apply STRIDE systematically to each interaction crossing a trust boundary.
-
-### Step 4: Mitigate and Verify
-- Propose concrete, engineering-led controls to eliminate or mitigate each threat.
+1. **Decompose the System:** Map external clients, web APIs, internal services, message buses, and data stores.
+2. **Draw Trust Boundaries:** Identify perimeter transitions (e.g. public Internet to DMZ, DMZ to internal network, multi-tenant DB).
+3. **Analyze Data Flows:** Examine every data flow that crosses a trust boundary against STRIDE.
+4. **Prioritize Risks:** Score threats using impact and likelihood to focus engineering effort.
+5. **Mitigation & Testing:** Define actionable mitigations that can be verified with automated tests.
 
 ---
 
-## 3. Deliverables & Outputs
-Produce a structured **Threat Model Document**:
-1. **Data Flow Diagram / Architecture Description:** Explicit trust boundaries.
-2. **Threat Table:** Classified using STRIDE with risk ratings.
-3. **Mitigation Plan:** Exact architectural or code changes required.
+## 3. Expected Deliverables
+1. **Threat Model Document:** System overview demarcating trust boundaries and data flows.
+2. **STRIDE Threat Matrix:** Identified threats categorized with severity, affected components, and risk rationale.
+3. **Mitigation Roadmap:** Specific architectural controls and automated test definitions addressing high-priority threats.
+
+---
+
+## 4. Progressive Disclosure (Reference Documents)
+Consult these bundled documents only when specific deep guidance is needed:
+
+- **STRIDE methodology and attack vectors:** Consult [stride-framework.md](references/stride-framework.md).
+- **Threat modeling inspection checklist:** Consult [threat-model-checklist.md](checklists/threat-model-checklist.md).
+- **Comprehensive threat model template:** Consult [threat-model-template.md](templates/threat-model-template.md).

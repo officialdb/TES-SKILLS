@@ -53,6 +53,34 @@ class TargetManifest(BaseModel):
     skills: Dict[str, InstalledSkillManifest] = Field(default_factory=dict)
 
 
+class EnvironmentStatus(BaseModel):
+    adapter_id: str
+    name: str
+    installed: bool = False
+    application_found: bool = False
+    installation_method: str = "—"
+    executable_found: bool = False
+    version_verified: bool = False
+    version: Optional[str] = None
+    application_path: Optional[str] = None
+    executable_path: Optional[str] = None
+    config_present: bool = False
+    skills_directory_present: bool = False
+    project_config_present: bool = False
+    available: bool = True
+    details: Optional[str] = None
+    global_path: str = ""
+    project_path: str = ""
+    detected_system: bool = False
+    detected_project: bool = False
+
+
+class DetectionReport(BaseModel):
+    project_root: Optional[str] = None
+    detected_environments: List[EnvironmentStatus] = Field(default_factory=list)
+    primary_recommended: Optional[str] = None
+
+
 class ValidationResult(BaseModel):
     valid: bool
     skill_id: str

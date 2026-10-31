@@ -10,6 +10,7 @@ from rich import box
 
 from tes import __version__
 from tes.adapters import detect_active_adapters, get_adapter, get_all_adapters, get_default_adapter
+from tes.analyzer import SkillAnalyzer
 from tes.config import find_project_root, get_skills_source_dir
 from tes.detector import Detector
 from tes.doctor import Doctor
@@ -120,25 +121,90 @@ def inspect(
 
 
 @app.command()
-def detect():
+def detect(
+    project: Optional[Path] = typer.Option(None, "--project", "-p", help="Explicit path to project root")
+):
     """Detect available AI coding environments and active skill directories."""
-    report = Detector.detect_environments()
+    report = Detector.detect_environments(project_root=project)
 
-    table = Table(title="Detected AI Coding Environments", box=box.ROUNDED)
-    table.add_column("Adapter", style="cyan")
-    table.add_column("Environment", style="bold white")
-    table.add_column("System Detected", style="green")
-    table.add_column("Project Config", style="yellow")
-    table.add_column("Global Target Path", style="dim")
+    # Table 1: Detected AI Coding Environments
+    table_env = Table(title="Detected AI Coding Environments", box=box.ROUNDED)
+    table_env.add_column("Adapter", style="cyan", no_wrap=True)
+    table_env.add_column("Environment", style="bold white")
+    table_env.add_column("Installed", style="bold")
+    table_env.add_column("Method", style="magenta")
+    table_env.add_column("CLI", style="yellow")
+    table_env.add_column("Version", style="green")
 
     for env in report.detected_environments:
-        sys_mark = "[green]✓ Yes[/green]" if env.detected_system else "[dim]No[/dim]"
-        proj_mark = "[green]✓ Yes[/green]" if env.detected_project else "[dim]No[/dim]"
-        table.add_row(env.adapter_id, env.name, sys_mark, proj_mark, env.global_path)
+        if env.adapter_id == "generic":
+            installed_str = "[dim]Target only[/dim]"
+            method_str = "[dim]N/A[/dim]"
+            cli_str = "[dim]N/A[/dim]"
+            version_str = "[dim]N/A[/dim]"
+        else:
+            installed_str = "[green]Yes[/green]" if env.installed else "[dim]No[/dim]"
+            method_str = env.installation_method if env.installation_method != "—" else "[dim]—[/dim]"
+            cli_str = "[green]Yes[/green]" if env.executable_found else "[dim]No[/dim]"
 
-    console.print(table)
-    console.print(f"[bold]Current Project Root:[/bold] {report.project_root}")
-    console.print(f"[bold]Recommended Default Target:[/bold] [green]{report.primary_recommended}[/green]\n")
+            if env.version:
+                version_str = env.version
+            elif env.application_found and not env.version:
+                version_str = "[yellow]Unknown[/yellow]"
+            elif env.executable_found and not env.version_verified:
+                version_str = "[yellow]Check failed[/yellow]"
+            else:
+                version_str = "[dim]—[/dim]"
+
+        table_env.add_row(
+            env.adapter_id,
+            env.name,
+            installed_str,
+            method_str,
+            cli_str,
+            version_str,
+        )
+
+    console.print(table_env)
+
+    # Table 2: Configuration and Skills
+    table_cfg = Table(title="Configuration and Skills", box=box.ROUNDED)
+    table_cfg.add_column("Adapter", style="cyan", no_wrap=True)
+    table_cfg.add_column("Configuration", style="yellow")
+    table_cfg.add_column("Skills Directory", style="magenta")
+    table_cfg.add_column("TES Support", style="blue")
+
+    for env in report.detected_environments:
+        config_parts = []
+        if env.config_present:
+            config_parts.append("Global")
+        if env.project_config_present:
+            config_parts.append("Project")
+        config_str = "[green]✓ " + " & ".join(config_parts) + "[/green]" if config_parts else "[dim]None[/dim]"
+
+        skills_dir_str = "[green]✓ Present[/green]" if env.skills_directory_present else "[dim]None[/dim]"
+        tes_str = "[green]Supported[/green]" if env.available else "[red]No[/red]"
+
+        table_cfg.add_row(
+            env.adapter_id,
+            config_str,
+            skills_dir_str,
+            tes_str,
+        )
+
+    console.print(table_cfg)
+
+    if report.project_root:
+        console.print(f"[bold]Current Project Root:[/bold] {report.project_root}")
+    else:
+        console.print("[bold]Current Project Root:[/bold] [yellow]None detected[/yellow] (Run inside a project or specify --project <path>)")
+
+    console.print(f"[bold]Recommended Default Target:[/bold] [green]{report.primary_recommended}[/green]")
+    has_installed = any(e.installed for e in report.detected_environments if e.adapter_id != "generic")
+    if not has_installed:
+        console.print("[dim]No installed AI coding application detected. Skills can still be installed into any supported target using --target <adapter> or the universal 'generic' target.[/dim]\n")
+    else:
+        console.print()
 
 
 @app.command()
@@ -379,3 +445,56 @@ def validate(
     else:
         console.print("\n[bold red]Validation failures detected. Please review errors above.[/bold red]\n")
         raise typer.Exit(1)
+
+
+@app.command()
+def analyze(
+    skill: Optional[str] = typer.Option(None, "--skill", help="Analyze a specific skill ID"),
+    bundle: Optional[str] = typer.Option(None, "--bundle", help="Analyze skills belonging to a specific bundle"),
+    report: bool = typer.Option(False, "--report", help="Generate and display full markdown diagnostics report"),
+):
+    """Analyze TES skills catalogue for token efficiency, size, and progressive disclosure."""
+    analyzer = SkillAnalyzer()
+    cat_report = analyzer.analyze_catalogue(skill_filter=skill, bundle_filter=bundle)
+
+    if report:
+        md = analyzer.generate_report_markdown(cat_report)
+        console.print(md)
+        return
+
+    table = Table(title=f"TES Skill Catalogue Analysis ({cat_report.skills_count} skills)", box=box.ROUNDED)
+    table.add_column("Skill ID", style="cyan", no_wrap=True)
+    table.add_column("Category", style="magenta")
+    table.add_column("SKILL.md Words", justify="right", style="bold white")
+    table.add_column("Approx Tokens", justify="right", style="green")
+    table.add_column("Ref Documents", justify="right", style="yellow")
+    table.add_column("Ref Tokens", justify="right", style="dim")
+    table.add_column("Diagnostics", style="white")
+
+    for s in cat_report.skills:
+        diag = "[green]Optimal[/green]" if not s.warnings else f"[yellow]{'; '.join(s.warnings)}[/yellow]"
+        table.add_row(
+            s.skill_id,
+            s.category,
+            f"{s.skill_md_words:,}",
+            f"{s.skill_md_approx_tokens:,}",
+            f"{s.total_reference_files} files",
+            f"~{s.total_reference_approx_tokens:,}",
+            diag,
+        )
+
+    console.print(table)
+    console.print(Panel(
+        f"[bold white]Total SKILL.md Instructions:[/bold white] {cat_report.total_skill_md_words:,} words | ~{cat_report.total_skill_md_tokens:,} tokens\n"
+        f"[bold white]Total Reference Documents:[/bold white] {cat_report.total_reference_files} files | ~{cat_report.total_reference_tokens:,} tokens\n"
+        f"[bold white]Full Catalogue Footprint:[/bold white] ~{cat_report.total_catalogue_tokens:,} tokens\n"
+        f"[dim]Token estimation method: {cat_report.tokenizer_method} (approximate)[/dim]",
+        title="Token Efficiency Summary",
+        box=box.ROUNDED,
+    ))
+
+    if cat_report.broken_references:
+        console.print(f"[bold red]Found {len(cat_report.broken_references)} broken reference link(s)![/bold red]")
+    if cat_report.potential_duplicates:
+        console.print(f"[bold yellow]Found {len(cat_report.potential_duplicates)} skill pair(s) with potential duplicated instruction blocks.[/bold yellow]")
+
