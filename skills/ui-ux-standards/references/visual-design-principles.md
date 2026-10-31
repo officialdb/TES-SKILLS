@@ -55,5 +55,6 @@ The em dash (`—`) is frequently overused by automated generation systems as a 
 ### 5. Responsiveness by Default
 Design fluidly and mobile-first:
 - Test layouts across 375px (mobile), 768px (tablet), 1024px (laptop), and 1440px (desktop).
+- Adapt navigation gracefully: present clean horizontal links on desktop and collapse to an accessible mobile hamburger menu at content-driven breakpoints.
 - Never allow horizontal viewport overflow.
 - Ensure touch targets are at least 44x44px on mobile viewports.

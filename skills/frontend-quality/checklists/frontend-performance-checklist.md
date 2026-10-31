@@ -7,6 +7,8 @@
 - [ ] Are template strings and user-facing copy free of em dashes (—) and generic marketing buzzwords?
 - [ ] Are touch targets on mobile at least 44x44px?
 - [ ] Is horizontal viewport scrolling eliminated on mobile devices (no `overflow-x` leak)?
+- [ ] Does mobile navigation use a semantic button with `aria-expanded`, `aria-controls`, and dynamic accessible labels?
+- [ ] Does mobile navigation close cleanly on link selection and Escape key press, with body scroll locked while modal overlays are active?
 - [ ] Are async loading states represented with accurately sized skeletons?
 - [ ] Are error boundaries in place around external widgets or complex visualizations?
 - [ ] Are inputs debounced or throttled where appropriate?

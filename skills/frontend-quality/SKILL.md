@@ -1,7 +1,7 @@
 ---
 name: frontend-quality
-version: 1.0.1
-description: Frontend architecture, Core Web Vitals optimization, responsive layout resilience, and state predictability. Use when building or optimizing web interfaces.
+version: 1.1.0
+description: Frontend architecture, Core Web Vitals, responsive navigation implementation, and state predictability. Use when building or optimizing web interfaces.
 compatibility:
   - hermes
   - opencode
@@ -48,14 +48,21 @@ compatibility:
 4. **Template String & Copy Auditing:**
    - Avoid excessive em dashes in user-facing website strings. Review headings, descriptions, paragraphs, buttons, and marketing copy across JSX templates, HTML files, and localization records to eliminate em dashes (`—`).
    - Refactor copy into natural grammatical structures (commas, prepositions, or distinct sentences). Preserve functional animations and technical uses of the em dash where appropriate (such as code identifiers and CLI arguments).
+5. **Responsive Navigation & Mobile Menu Implementation:**
+   - Implement mobile hamburger navigation using semantic `<button>` elements with dynamic accessible labels (`aria-label="Open navigation menu"` / `"Close navigation menu"`), `aria-expanded`, and `aria-controls`.
+   - Ensure complete keyboard operability (`Tab`, `Shift+Tab`, `Enter`, `Space`) and add an `Escape` key listener that dismisses open overlay navigation and returns focus to the toggle button.
+   - Prevent background body scrolling (`overflow: hidden` on document body) when modal drawers or full-screen navigation overlays are active.
+   - Close mobile navigation automatically when a link is clicked, and handle viewport resize gracefully so menus do not linger when returning to desktop views.
+   - Share navigation items through a single source-of-truth data structure rather than duplicating markup across desktop and mobile templates. Avoid heavy third-party menu dependencies.
 
 ---
 
 ## 3. Expected Deliverables
 1. **Quality Frontend Code:** Clean, typed component implementations without layout shift bugs or decorative pulsing CSS.
-2. **Reviewed Template Content:** User-facing template strings free of em dash crutches and promotional clutter.
-3. **Performance Audit:** Verification that bundle sizes and Core Web Vitals fall within budget.
-4. **Responsive Verification:** Evidence of verified layout integrity across mobile, tablet, and desktop breakpoints.
+2. **Responsive Navigation Components:** Accessible mobile hamburger menus with full keyboard operability, ARIA state bindings, and desktop layouts.
+3. **Reviewed Template Content:** User-facing template strings free of em dash crutches and promotional clutter.
+4. **Performance Audit:** Verification that bundle sizes and Core Web Vitals fall within budget.
+5. **Responsive Verification:** Evidence of verified layout integrity across mobile, tablet, and desktop breakpoints.
 
 ---
 
@@ -63,5 +70,6 @@ compatibility:
 Consult these bundled documents only when specific deep guidance is needed:
 
 - **Core Web Vitals deep-dive and diagnostics:** Consult [core-web-vitals.md](references/core-web-vitals.md).
+- **Responsive navigation implementation and accessibility:** Consult [responsive-navigation-implementation.md](references/responsive-navigation-implementation.md).
 - **Frontend performance verification:** Consult [frontend-performance-checklist.md](checklists/frontend-performance-checklist.md).
 - **Performance audit report template:** Consult [frontend-audit-report.md](templates/frontend-audit-report.md).

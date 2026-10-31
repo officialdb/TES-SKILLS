@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.2.2] - 2026-10-31
 
+### Enhanced - Responsive Navigation & Mobile Hamburger Menus (v1.1.0)
+- **Skill Version Increments:** Incremented `ui-ux-standards` and `frontend-quality` to `1.1.0` in the registry and frontmatter.
+- **Responsive Navigation Design (`ui-ux-standards`):**
+  - Added dedicated standards for desktop horizontal navigation layouts (branding alignment, link volume caps to prevent overcrowding, visual hierarchy).
+  - Established mobile hamburger menu standards (recognizable three-line icon, minimum 44x44px touch targets, clear toggle/close states, occlusion prevention).
+  - Defined content-driven responsive breakpoints and device orientation resilience (portrait and landscape usability, zero horizontal overflow).
+  - Documented navigation archetypes (dropdown, slide-in side drawer, full-screen overlay, expandable accordion) to allow project-appropriate architecture.
+  - Added reference manual `references/responsive-navigation-design.md` and reusable verification checklist `checklists/responsive-navigation-checklist.md`.
+- **Responsive Navigation Implementation & Accessibility (`frontend-quality`):**
+  - Added implementation standards covering state predictability, auto-closing on route navigation, viewport resize sync, and body scroll locking (`overflow: hidden`) during modal navigation overlays.
+  - Established WCAG accessibility requirements: semantic `<button>` trigger, dynamic accessible names (`aria-label`), `aria-expanded`, `aria-controls`, full keyboard navigation, `Escape` key dismissal with focus restoration to trigger, and `:focus-visible` styling.
+  - Enforced single-source-of-truth navigation data items to eliminate duplicated markup across desktop and mobile views, while eliminating unnecessary third-party menu dependencies.
+  - Added reference manual `references/responsive-navigation-implementation.md` and updated `checklists/frontend-performance-checklist.md`.
+
 ### Added - Backend Engineering Skill (v1.0.0)
 - **New Foundation Skill (`backend-engineering`):** Created a comprehensive, framework-independent, language-agnostic, and production-oriented backend engineering skill (`skills/backend-engineering/SKILL.md`) structured under TES's 3-level progressive disclosure architecture.
 - **Reference Manuals (Level 3 Knowledge):** Added 10 specialized backend engineering reference documents in `skills/backend-engineering/references/`:

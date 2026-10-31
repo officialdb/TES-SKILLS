@@ -108,16 +108,16 @@ def test_no_duplicate_instruction_blocks_between_ui_skills():
     assert len(cat_report.potential_duplicates) == 0, f"Duplicate blocks found: {cat_report.potential_duplicates}"
 
 
-def test_skills_versioned_at_1_0_1(loaded_registry: Registry, skills_dir: Path):
-    """Verify ui-ux-standards and frontend-quality are versioned at 1.0.1 in registry and frontmatter."""
+def test_skills_versioned_at_1_1_0(loaded_registry: Registry, skills_dir: Path):
+    """Verify ui-ux-standards and frontend-quality are versioned at 1.1.0 in registry and frontmatter."""
     ui_meta = loaded_registry.get_skill("ui-ux-standards")
     fq_meta = loaded_registry.get_skill("frontend-quality")
 
     assert ui_meta is not None
-    assert ui_meta.version == "1.0.1"
+    assert ui_meta.version == "1.1.0"
 
     assert fq_meta is not None
-    assert fq_meta.version == "1.0.1"
+    assert fq_meta.version == "1.1.0"
 
     # Verify unrelated skills remain at 1.0.0
     for sid in ["engineering-core", "software-engineering", "security-audit", "devops-engineering"]:
@@ -127,18 +127,18 @@ def test_skills_versioned_at_1_0_1(loaded_registry: Registry, skills_dir: Path):
     ui_fm, _, _ = parse_frontmatter((skills_dir / "ui-ux-standards" / "SKILL.md").read_text(encoding="utf-8"))
     fq_fm, _, _ = parse_frontmatter((skills_dir / "frontend-quality" / "SKILL.md").read_text(encoding="utf-8"))
 
-    assert str(ui_fm.get("version")) == "1.0.1"
-    assert str(fq_fm.get("version")) == "1.0.1"
+    assert str(ui_fm.get("version")) == "1.1.0"
+    assert str(fq_fm.get("version")) == "1.1.0"
 
 
-def test_update_mechanism_identifies_1_0_1_as_newer(temp_project: Path, loaded_registry: Registry):
-    """Verify TES update mechanism identifies 1.0.1 as an available update over installed 1.0.0."""
+def test_update_mechanism_identifies_1_1_0_as_newer(temp_project: Path, loaded_registry: Registry):
+    """Verify TES update mechanism identifies 1.1.0 as an available update over installed 1.0.0 and 1.0.1."""
     adapter = get_adapter("opencode")
     manifest = TargetManifest(
         skills={
             "ui-ux-standards": InstalledSkillManifest(
                 skill_id="ui-ux-standards",
-                version="1.0.0",
+                version="1.0.1",
                 installed_at="2026-10-31T10:51:00Z",
                 scope=Scope.PROJECT,
                 target="opencode",
@@ -172,18 +172,79 @@ def test_update_mechanism_identifies_1_0_1_as_newer(temp_project: Path, loaded_r
 
     status_map = {s.skill_id: s for s in statuses}
 
-    # ui-ux-standards update available (1.0.0 -> 1.0.1)
+    # ui-ux-standards update available (1.0.1 -> 1.1.0)
     assert status_map["ui-ux-standards"].update_available is True
-    assert status_map["ui-ux-standards"].installed_version == "1.0.0"
-    assert status_map["ui-ux-standards"].latest_version == "1.0.1"
+    assert status_map["ui-ux-standards"].installed_version == "1.0.1"
+    assert status_map["ui-ux-standards"].latest_version == "1.1.0"
 
-    # frontend-quality update available (1.0.0 -> 1.0.1)
+    # frontend-quality update available (1.0.0 -> 1.1.0)
     assert status_map["frontend-quality"].update_available is True
     assert status_map["frontend-quality"].installed_version == "1.0.0"
-    assert status_map["frontend-quality"].latest_version == "1.0.1"
+    assert status_map["frontend-quality"].latest_version == "1.1.0"
 
     # engineering-core is up to date (1.0.0 == 1.0.0)
     assert status_map["engineering-core"].update_available is False
     assert status_map["engineering-core"].installed_version == "1.0.0"
     assert status_map["engineering-core"].latest_version == "1.0.0"
+
+
+def test_ui_ux_standards_responsive_navigation_standards(skills_dir: Path):
+    """Verify ui-ux-standards contains comprehensive responsive navigation standards."""
+    skill_file = skills_dir / "ui-ux-standards" / "SKILL.md"
+    content = skill_file.read_text(encoding="utf-8")
+
+    # Core skill coverage
+    assert "Responsive Navigation Design" in content
+    assert "Desktop Navigation Architecture" in content
+    assert "Mobile Hamburger Menu" in content
+    assert "Responsive Breakpoint Behavior" in content
+    assert "Pattern Selection" in content
+    assert "44x44px" in content
+
+    # Reference documentation exists and is linked
+    ref_file = skills_dir / "ui-ux-standards" / "references" / "responsive-navigation-design.md"
+    assert ref_file.exists()
+    assert "responsive-navigation-design.md" in content
+    ref_content = ref_file.read_text(encoding="utf-8")
+    assert "Foundations of Responsive Navigation" in ref_content
+    assert "Navigation Archetypes" in ref_content
+    assert "Dropdown Navigation" in ref_content
+    assert "Slide-In Drawer" in ref_content
+    assert "Full-Screen Overlay" in ref_content
+    assert "Expandable Accordion" in ref_content
+
+    # Reusable checklist exists and is linked
+    cl_file = skills_dir / "ui-ux-standards" / "checklists" / "responsive-navigation-checklist.md"
+    assert cl_file.exists()
+    assert "responsive-navigation-checklist.md" in content
+    cl_content = cl_file.read_text(encoding="utf-8")
+    assert "Desktop Display" in cl_content
+    assert "Mobile Hamburger" in cl_content
+    assert "Escape Key Support" in cl_content
+    assert "Touch Target Sizing" in cl_content
+
+
+def test_frontend_quality_responsive_navigation_implementation(skills_dir: Path):
+    """Verify frontend-quality contains detailed implementation standards for responsive navigation."""
+    skill_file = skills_dir / "frontend-quality" / "SKILL.md"
+    content = skill_file.read_text(encoding="utf-8")
+
+    # Core skill coverage
+    assert "Responsive Navigation & Mobile Menu Implementation" in content
+    assert "aria-label" in content
+    assert "aria-expanded" in content
+    assert "aria-controls" in content
+    assert "Escape" in content
+    assert "overflow: hidden" in content
+
+    # Reference documentation exists and is linked
+    ref_file = skills_dir / "frontend-quality" / "references" / "responsive-navigation-implementation.md"
+    assert ref_file.exists()
+    assert "responsive-navigation-implementation.md" in content
+    ref_content = ref_file.read_text(encoding="utf-8")
+    assert "Single Source of Truth" in ref_content
+    assert "Body Scroll Locking" in ref_content
+    assert "Escape Key Dismissal" in ref_content
+    assert "Single Source of Navigation Items" in ref_content
+    assert "Zero Layout Shifts (CLS < 0.1)" in ref_content
 
