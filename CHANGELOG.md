@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.2] - 2026-10-31
+
+### Changed - Website Copy & Visual Presentation Standards Refinement
+- **Prohibited Decorative Animated Dots:** Updated `ui-ux-standards` and `frontend-quality` to strictly prohibit cosmetic blinking, pulsing, or flashing dots beside titles, headings, badges, hero sections, cards, and navigation.
+- **Permitted Functional Indicators:** Clearly distinguished decorative dots from genuine functional system indicators (such as WebSocket connectivity, active streaming, background progress), requiring motion in permitted indicators to be subtle and accessible.
+- **Website Copywriting Standards (Eliminating Em Dashes):** Established a strong copywriting preference against using em dashes (`—`) across all user-facing website content (headlines, section titles, subheadings, feature bullets, paragraphs, testimonials, CTAs, navigation, metadata) in favor of natural sentence structure, commas, prepositions, or distinct sentences.
+- **Context Boundaries Preserved:** Clarified that technical documentation, code syntax, and CLI arguments remain exempt from the em dash restriction when grammatically or syntactically appropriate.
+- **CSS Motion & Template Auditing (`frontend-quality`):** Added frontend engineering rules prohibiting decorative `@keyframes` pulses/blinks in CSS, requiring status indicators to bind directly to reactive state flags, and establishing template string auditing for copy quality.
+- **Updated Checklists & References:** Expanded `ui-ux-review-checklist.md`, `visual-design-principles.md`, and `frontend-performance-checklist.md` with explicit review criteria for motion restraint and website copy polish.
+
 ## [0.2.1] - 2026-10-31
 
 ### Changed - Multi-Method AI Environment Detection

@@ -13,11 +13,11 @@ compatibility:
 # Frontend Quality
 
 ## Purpose & Activation
-`frontend-quality` provides agents with engineering standards for building fast, maintainable, responsive, and resilient frontend web applications. It emphasizes predictable state management, Core Web Vitals optimization, and component composition.
+`frontend-quality` provides agents with engineering standards for building fast, maintainable, responsive, and resilient frontend web applications. It emphasizes predictable state management, Core Web Vitals optimization, CSS motion discipline, and component composition.
 
-- **Primary Skill For:** Implementing frontend components, improving page load speeds, debugging layout shifts, and optimizing interactive responsiveness.
-- **Composition:** Pair with `ui-ux-standards` when designing new visual components or refining user flows.
-- **Ownership Boundary:** Typography scale, color palettes, and WCAG accessibility standards belong to `ui-ux-standards`.
+- **Primary Skill For:** Implementing frontend components, optimizing interactive responsiveness, auditing template copy, and eliminating unnecessary CSS animation overhead.
+- **Composition:** Pair with `ui-ux-standards` when designing visual layouts or defining design tokens.
+- **Ownership Boundary:** Visual design foundations, color palettes, and typographic scales belong to `ui-ux-standards`.
 
 ---
 
@@ -36,19 +36,24 @@ compatibility:
 1. **Predictable State Management:**
    - Maintain a single source of truth for UI state. Avoid synchronizing state across multiple independent stores.
    - Keep state local to the components that need it; lift state up only when siblings share data.
-2. **Component Composition:**
-   - Design small, focused components with explicit props and strong TypeScript typing.
-   - Separate presentational components from stateful data-fetching containers.
-3. **Responsive Resilience:**
+2. **Component Composition & Resilience:**
+   - Design small, focused components with explicit props and strong TypeScript typing. Separate presentational components from stateful data-fetching containers.
    - Build mobile-first. Ensure layouts adapt seamlessly from 320px mobile viewports to ultra-wide displays without horizontal scrolling.
-   - Handle edge-case content gracefully: empty states, long unbreakable strings, missing avatars, and network error banners.
+3. **CSS Motion Hygiene (Eliminate Decorative Blinking):**
+   - Prohibit `@keyframes` pulse or blink animations on decorative elements (e.g., `animate-pulse` or `animate-ping` on static section badges or title dots).
+   - Require animated status indicators (such as `<LiveBadge />`) to bind directly to reactive state boolean flags (`isStreaming`, `isConnecting`). When state is idle or static, animations must be inactive.
+   - Wrap continuous keyframe animations inside `@media (prefers-reduced-motion: no-preference)`.
+4. **Template String & Copy Auditing:**
+   - Audit JSX templates, HTML files, and localization records to eliminate em dashes (`—`) from user-facing headings and promotional strings.
+   - Refactor copy into natural grammatical structures (commas, prepositions, or distinct sentences). Maintain hyphenated syntax in code identifiers and CLI arguments.
 
 ---
 
 ## 3. Expected Deliverables
-1. **Quality Frontend Code:** Clean, typed component implementations without layout shift bugs.
-2. **Performance Audit:** Verification that bundle sizes and Core Web Vitals fall within budget.
-3. **Responsive Verification:** Evidence of verified layout integrity across mobile, tablet, and desktop breakpoints.
+1. **Quality Frontend Code:** Clean, typed component implementations without layout shift bugs or decorative pulsing CSS.
+2. **Reviewed Template Content:** User-facing template strings free of em dash crutches and promotional clutter.
+3. **Performance Audit:** Verification that bundle sizes and Core Web Vitals fall within budget.
+4. **Responsive Verification:** Evidence of verified layout integrity across mobile, tablet, and desktop breakpoints.
 
 ---
 

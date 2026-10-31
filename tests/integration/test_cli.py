@@ -9,7 +9,7 @@ def test_cli_version(runner: CliRunner):
     result = runner.invoke(app, ["version"])
     assert result.exit_code == 0
     assert "TES — Techpronnet Engineering Skills" in result.output
-    assert "0.2.1" in result.output
+    assert "0.2.2" in result.output
 
 
 def test_cli_search(runner: CliRunner):

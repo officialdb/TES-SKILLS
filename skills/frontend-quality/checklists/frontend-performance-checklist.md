@@ -2,6 +2,9 @@
 
 - [ ] Do all images have explicit aspect ratios or width/height dimensions?
 - [ ] Are heavy third-party packages dynamically imported?
+- [ ] Are CSS pulse and blink animations eliminated on decorative dots, tags, and title badges?
+- [ ] Are status animations conditionally rendered only during active, dynamic state (e.g., connecting, streaming)?
+- [ ] Are template strings and user-facing copy free of em dashes (—) and generic marketing buzzwords?
 - [ ] Are touch targets on mobile at least 44x44px?
 - [ ] Is horizontal viewport scrolling eliminated on mobile devices (no `overflow-x` leak)?
 - [ ] Are async loading states represented with accurately sized skeletons?
