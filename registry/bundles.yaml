@@ -1,0 +1,45 @@
+bundles:
+  - id: engineering-suite
+    name: Engineering Suite
+    description: Essential core engineering, architecture, code quality, testing, code review, and onboarding skills.
+    skills:
+      - engineering-core
+      - system-architect
+      - software-engineering
+      - code-review
+      - testing-strategy
+      - project-onboarding
+
+  - id: security-suite
+    name: Security Suite
+    description: Full DevSecOps security assessment, threat modeling, and secure development skills.
+    skills:
+      - security-audit
+      - secure-development
+      - threat-modeling
+
+  - id: release-suite
+    name: Release Suite
+    description: CI/CD automation, build verification, deployment procedures, and smoke testing verification skills.
+    skills:
+      - devops-engineering
+      - deployment-verification
+
+  - id: complete-suite
+    name: Complete Suite
+    description: All published Techpronnet Engineering Skills across engineering, security, devops, design, and memory.
+    skills:
+      - engineering-core
+      - system-architect
+      - software-engineering
+      - code-review
+      - project-onboarding
+      - testing-strategy
+      - security-audit
+      - secure-development
+      - threat-modeling
+      - devops-engineering
+      - deployment-verification
+      - ui-ux-standards
+      - frontend-quality
+      - engineering-memory

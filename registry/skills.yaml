@@ -1,0 +1,126 @@
+skills:
+  - id: engineering-core
+    name: Engineering Core
+    version: 1.0.0
+    category: engineering
+    description: Fundamental software engineering principles, understand-before-modifying protocols, balanced autonomy, and non-destructive modification standards.
+    path: skills/engineering-core
+    tags: [engineering, standards, core, architecture, best-practices]
+    compatibility: [hermes, opencode, codex, claude-code, gemini-cli, generic]
+
+  - id: system-architect
+    name: System Architect
+    version: 1.0.0
+    category: engineering
+    description: High-level system architecture design, domain modeling, bounded contexts, interface design, and Architectural Decision Records (ADR).
+    path: skills/system-architect
+    tags: [architecture, system-design, domain-modeling, adr, interfaces]
+    compatibility: [hermes, opencode, codex, claude-code, gemini-cli, generic]
+
+  - id: software-engineering
+    name: Software Engineering
+    version: 1.0.0
+    category: engineering
+    description: Implementation excellence, clean modular code, minimal abstractions, robust error handling, dependency hygiene, and maintainability.
+    path: skills/software-engineering
+    tags: [clean-code, implementation, refactoring, error-handling, dependencies]
+    compatibility: [hermes, opencode, codex, claude-code, gemini-cli, generic]
+
+  - id: code-review
+    name: Code Review
+    version: 1.0.0
+    category: engineering
+    description: Dual-axis code review evaluating repository standards compliance and specification alignment with constructive, actionable feedback.
+    path: skills/code-review
+    tags: [code-review, standards, specifications, pull-requests, quality]
+    compatibility: [hermes, opencode, codex, claude-code, gemini-cli, generic]
+
+  - id: project-onboarding
+    name: Project Onboarding
+    version: 1.0.0
+    category: engineering
+    description: Rapid comprehension and mapping of unknown codebases, dependency configurations, frameworks, test setups, and conventions without disruption.
+    path: skills/project-onboarding
+    tags: [onboarding, codebase-inspection, discovery, repo-mapping]
+    compatibility: [hermes, opencode, codex, claude-code, gemini-cli, generic]
+
+  - id: testing-strategy
+    name: Testing Strategy
+    version: 1.0.0
+    category: engineering
+    description: Comprehensive testing methodology, test pyramid, deterministic unit tests, integration testing, boundary analysis, and regression prevention.
+    path: skills/testing-strategy
+    tags: [testing, tdd, integration-tests, unit-tests, quality-assurance]
+    compatibility: [hermes, opencode, codex, claude-code, gemini-cli, generic]
+
+  - id: security-audit
+    name: Security Audit
+    version: 1.0.0
+    category: security
+    description: Evidence-backed vulnerability assessments, OWASP Top 10, CWE pattern recognition, threat classification, and clear remediation guidance.
+    path: skills/security-audit
+    tags: [security, audit, owasp, vulnerabilities, cwe, remediation]
+    compatibility: [hermes, opencode, codex, claude-code, gemini-cli, generic]
+
+  - id: secure-development
+    name: Secure Development
+    version: 1.0.0
+    category: security
+    description: Security-by-design development practices covering input sanitization, safe auth/RBAC, tenant isolation, SQLi/XSS/SSRF prevention, and secrets handling.
+    path: skills/secure-development
+    tags: [security, secure-coding, authentication, rbac, input-validation, defense]
+    compatibility: [hermes, opencode, codex, claude-code, gemini-cli, generic]
+
+  - id: threat-modeling
+    name: Threat Modeling
+    version: 1.0.0
+    category: security
+    description: Structured STRIDE threat modeling, trust boundary identification, attack vector mapping, and defensive mitigation planning.
+    path: skills/threat-modeling
+    tags: [threat-modeling, stride, trust-boundaries, attack-vectors, risk-analysis]
+    compatibility: [hermes, opencode, codex, claude-code, gemini-cli, generic]
+
+  - id: devops-engineering
+    name: DevOps Engineering
+    version: 1.0.0
+    category: devops
+    description: Git workflows, CI/CD pipeline authoring, reproducible builds, containerization, environment hygiene, and infrastructure-as-code safety.
+    path: skills/devops-engineering
+    tags: [devops, ci-cd, git, pipelines, containers, infrastructure]
+    compatibility: [hermes, opencode, codex, claude-code, gemini-cli, generic]
+
+  - id: deployment-verification
+    name: Deployment Verification
+    version: 1.0.0
+    category: devops
+    description: Post-deployment smoke testing, canary health checks, synthetic transactions, zero-downtime rollback strategies, and cutover validation.
+    path: skills/deployment-verification
+    tags: [deployment, verification, smoke-testing, rollback, monitoring]
+    compatibility: [hermes, opencode, codex, claude-code, gemini-cli, generic]
+
+  - id: ui-ux-standards
+    name: UI/UX Standards
+    version: 1.0.0
+    category: design
+    description: Professional, restrained, accessible interface design with clear hierarchy, purposeful color, clean typography, and WCAG compliance.
+    path: skills/ui-ux-standards
+    tags: [design, ui, ux, accessibility, typography, styling, web]
+    compatibility: [hermes, opencode, codex, claude-code, gemini-cli, generic]
+
+  - id: frontend-quality
+    name: Frontend Quality
+    version: 1.0.0
+    category: design
+    description: Modern frontend architecture, responsive resilience, Core Web Vitals performance, component composition, and state predictability.
+    path: skills/frontend-quality
+    tags: [frontend, web-vitals, performance, responsive, state-management, react]
+    compatibility: [hermes, opencode, codex, claude-code, gemini-cli, generic]
+
+  - id: engineering-memory
+    name: Engineering Memory
+    version: 1.0.0
+    category: memory
+    description: Local-first, offline project memory system using structured markdown (.engineering/) for architecture decisions, lessons, and standards.
+    path: skills/engineering-memory
+    tags: [memory, local-first, offline, project-knowledge, adr, documentation]
+    compatibility: [hermes, opencode, codex, claude-code, gemini-cli, generic]
