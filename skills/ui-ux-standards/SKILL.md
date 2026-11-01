@@ -1,7 +1,7 @@
 ---
 name: ui-ux-standards
-version: 1.2.0
-description: Professional, accessible interface design with clear visual hierarchy, purposeful color, responsive layouts, dashboard composition, and WCAG compliance.
+version: 1.3.0
+description: Professional, accessible interface design with clear visual hierarchy, purposeful color, responsive layouts, e-commerce storefronts, PDPs, dashboards, and WCAG compliance.
 compatibility:
   - hermes
   - opencode
@@ -85,7 +85,20 @@ compatibility:
    - Use centered editorial hero layouts pairing expressive serif headlines with constrained sans-serif descriptions (`max-w-2xl` / 500–680px) to maximize readability.
    - Enforce conversion action hierarchy: pair a solid primary CTA button with a complementary outlined secondary action ("Watch A Demo").
    - Feature product-led visual showcases (realistic interface mockups, outcome badges like "$5,000 collected") in place of abstract stock photos. Use generous whitespace to focus attention naturally.
-3. **Component Library Brand Independence:**
+3. **E-Commerce Storefront Composition (Grounded in Reference A):**
+   - Structure desktop storefronts with top announcement bars, prominent central search inputs, and explicit utility clusters (Account, Wishlist, Cart with numeric counter).
+   - Balance high product density by pairing a persistent vertical category sidebar with a promotional hero showcase and horizontal reassurance indicators.
+   - Maintain visual rhythm across product discovery sections by interspersing uniform 5-column product grids with 2-column promotional editorial banners, blog previews, and partner brand directories.
+   - Standardize product cards with neutral image containers, status badges (freshness and discounts), clear product titles, bold prices, and star ratings with review counts.
+4. **Product Detail Page Architecture (Grounded in Reference B):**
+   - Organize the workspace using top breadcrumbs and an asymmetric two-column layout: prominent image gallery with thumbnail variations on the left, buying decision flow on the right.
+   - Group purchase decisions logically: product title, social ratings, price and promotional tags, accessible variant selectors, quantity stepper with stock scarcity feedback, and reassurance micro-services.
+   - Enforce conversion action hierarchy: pair a solid primary CTA ("Buy Now") with a complementary outlined secondary action ("Add to Cart").
+   - Structure deep technical specifications into tabbed navigation panels and readable multi-column data tables with distinct header styling.
+5. **Context-Sensitive Domain Design:**
+   - Tailor layout density and navigation patterns to the specific product domain (storefront, PDP, dashboard, landing page) without applying one template universally.
+   - Treat specific palettes (such as forest green or royal blue) as brand-specific expressions rather than universal standards.
+6. **Component Library Brand Independence:**
    - Treat component libraries (e.g. shadcn/ui, Flowbite) as implementation building blocks, never as a default aesthetic.
    - Map library tokens (color, typography, corner radii, spacing) to the project's unique brand design tokens.
    - Ensure visual consistency across buttons, inputs, cards, dialogs, and tables. Strip out default decorative pulsing dots or noisy gradient gimmicks.
@@ -104,10 +117,11 @@ compatibility:
 1. **Polished UI Components:** Accessible, beautifully spaced, responsive interface designs free of decorative blinking artifacts.
 2. **Dashboard & Workspace Layouts:** Structured multi-column dashboard compositions, scannable data widgets, and persistent or collapsible sidebars.
 3. **High-Converting Landing Pages:** Editorial typography, clear CTA hierarchy, and product-led hero showcases.
-4. **Responsive Navigation Specs:** Clean desktop layouts and mobile hamburger menu designs adapted to product architecture.
-5. **Refined Website Copy:** Natural, human-sounding interface copy free of em dash crutches and promotional clichés.
-6. **Design Specification:** Clear design tokens (typography, color, spacing) matching existing systems.
-7. **Accessibility Sign-off:** Verification of keyboard navigation, screen reader labels, and contrast compliance.
+4. **E-Commerce Storefronts & Product Detail Pages:** Multi-section discovery grids, promotional banners, product galleries, variant selectors, and structured specification tables.
+5. **Responsive Navigation Specs:** Clean desktop layouts and mobile hamburger menu designs adapted to product architecture.
+6. **Refined Website Copy:** Natural, human-sounding interface copy free of em dash crutches and promotional clichés.
+7. **Design Specification:** Clear design tokens (typography, color, spacing) matching existing systems.
+8. **Accessibility Sign-off:** Verification of keyboard navigation, screen reader labels, and contrast compliance.
 
 ---
 
@@ -118,6 +132,7 @@ Consult these bundled documents only when specific deep guidance is needed:
 - **Visual design foundations and copy guidelines:** Consult [visual-design-principles.md](references/visual-design-principles.md).
 - **Dashboard design principles and information architecture:** Consult [dashboard-design-principles.md](references/dashboard-design-principles.md).
 - **Landing page design principles and visual storytelling:** Consult [landing-page-design-principles.md](references/landing-page-design-principles.md).
+- **E-commerce design principles and product detail architecture:** Consult [ecommerce-design-principles.md](references/ecommerce-design-principles.md).
 - **Component library design guidelines and visual consistency:** Consult [component-library-design-guidelines.md](references/component-library-design-guidelines.md).
 - **Responsive navigation design patterns:** Consult [responsive-navigation-design.md](references/responsive-navigation-design.md).
 - **Responsive navigation verification checklist:** Consult [responsive-navigation-checklist.md](checklists/responsive-navigation-checklist.md).

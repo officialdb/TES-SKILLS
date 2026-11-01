@@ -1,7 +1,7 @@
 ---
 name: frontend-quality
-version: 1.2.0
-description: Frontend architecture, Core Web Vitals, component library integration, dashboard grids, and responsive layout resilience. Use when building web apps.
+version: 1.3.0
+description: Frontend architecture, Core Web Vitals, component library integration, e-commerce layouts, and responsive layout resilience. Use when building web apps.
 compatibility:
   - hermes
   - opencode
@@ -63,6 +63,12 @@ compatibility:
    - Implement multi-column dashboard layouts using responsive CSS Grid (`grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6`), persistent or collapsible sidebars, and isolated widget error boundaries.
    - Build accessible data visualizations: circular progress rings via SVG `stroke-dashoffset` with `role="progressbar"`, accessible bar chart figures, and interval-cleared digital timers with polite screen-reader updates.
    - Prevent landing page horizontal overflow from tilted mockup cards using `overflow-x: clip`, and optimize LCP (<2.5s) with eager image preloads and explicit aspect ratios.
+8. **E-Commerce Architecture & Performance:**
+   - Implement responsive discovery grids reflowing from 2 columns on mobile (`grid-cols-2 gap-3`) to 5 columns on desktop (`xl:grid-cols-5 gap-6`) without layout overflow.
+   - Reserve explicit layout space with aspect-ratio wrappers (`aspect-square` or `aspect-[4/5]`) on all product imagery to eliminate layout shifts (CLS < 0.1).
+   - Base image loading priority on viewport presence and LCP relevance: preload primary storefront hero and main PDP imagery with `loading="eager"` and `fetchpriority="high"`, avoid blanket lazy-loading on visible above-the-fold thumbnails, and apply `loading="lazy"` to below-the-fold catalog grids and off-screen assets.
+   - Implement functional interactive controls with predictable state management: debounced search queries (250–300ms) with request cancellation, synchronized thumbnail and color swatch variant pickers, bounded quantity steppers, asynchronous cart mutations with optimistic rollback upon failure, and WAI-ARIA accessible tabbed specifications (`role="tablist"`).
+   - Adapt specification tables responsively using horizontal overflow scrolling or mobile definition list cards (`<dl>`), maintaining minimum 44x44px touch targets across all mobile controls.
 
 ---
 
@@ -70,10 +76,11 @@ compatibility:
 1. **Quality Frontend Code:** Clean, typed component implementations without layout shift bugs or decorative pulsing CSS.
 2. **Responsive Dashboard & Workspace Grids:** Multi-column layouts, collapsible sidebars, and accessible data widgets with independent error boundaries.
 3. **High-Performance Landing Pages:** Hero assets optimized for Core Web Vitals (LCP < 2.5s, CLS < 0.1), fluid typography, and zero horizontal overflow.
-4. **Vetted Component Library Integration:** Clean adoption of shadcn/ui, Flowbite, or headless primitives customized to brand tokens without dependency bloat.
-5. **Responsive Navigation Components:** Accessible mobile hamburger menus with full keyboard operability, ARIA state bindings, and desktop layouts.
-6. **Reviewed Template Content:** User-facing template strings free of em dash crutches and promotional clutter.
-7. **Performance Audit:** Verification that bundle sizes and Core Web Vitals fall within budget.
+4. **E-Commerce Components & Grids:** Responsive product cards, image galleries, variant swatches, bounded steppers, and accessible specification tables.
+5. **Vetted Component Library Integration:** Clean adoption of shadcn/ui, Flowbite, or headless primitives customized to brand tokens without dependency bloat.
+6. **Responsive Navigation Components:** Accessible mobile hamburger menus with full keyboard operability, ARIA state bindings, and desktop layouts.
+7. **Reviewed Template Content:** User-facing template strings free of em dash crutches and promotional clutter.
+8. **Performance Audit:** Verification that bundle sizes and Core Web Vitals fall within budget.
 
 ---
 
@@ -84,6 +91,7 @@ Consult these bundled documents only when specific deep guidance is needed:
 - **Frontend component library selection and integration:** Consult [frontend-component-library-selection.md](references/frontend-component-library-selection.md).
 - **Dashboard layout implementation and data widgets:** Consult [dashboard-layout-implementation.md](references/dashboard-layout-implementation.md).
 - **Landing page implementation and performance architecture:** Consult [landing-page-implementation.md](references/landing-page-implementation.md).
+- **E-commerce implementation, component architecture, and performance:** Consult [ecommerce-implementation.md](references/ecommerce-implementation.md).
 - **Responsive navigation implementation and accessibility:** Consult [responsive-navigation-implementation.md](references/responsive-navigation-implementation.md).
 - **Frontend performance verification:** Consult [frontend-performance-checklist.md](checklists/frontend-performance-checklist.md).
 - **Performance audit report template:** Consult [frontend-audit-report.md](templates/frontend-audit-report.md).

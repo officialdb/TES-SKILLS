@@ -5,6 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.3] - 2026-11-01
+
+### Enhanced - E-commerce Storefront & Product Detail Design Reference Architecture (v1.3.0)
+- **Skill Version Increments:** Incremented `ui-ux-standards` and `frontend-quality` to `1.3.0` in the registry and frontmatter.
+- **E-Commerce Design Principles & Product Experience (`ui-ux-standards`):**
+  - Extracted evidence-based design principles from Reference A (ZenVora E-commerce Storefront): promotional announcement bars, 3-zone brand/search/utility headers, persistent category sidebars with promotional hero balance, 5-column product discovery grids with status badges, 2-column promotional editorial banners, blog previews, brand directories, and 5-column footers.
+  - Extracted buying decision hierarchy from Reference B (SoundWave Product Detail Page): breadcrumb navigation, asymmetric 2-column PDP layout, dominant product galleries with thumbnail variations, star rating placement, current vs. previous strikethrough pricing, color variant chips, bounded quantity steppers, dual CTA hierarchy ("Buy Now" vs. "Add to Cart"), trust reassurance micro-services, and 4-column technical specification tables.
+  - Established context-sensitive design principles in `visual-design-principles.md` enforcing domain adaptability across e-commerce storefronts, PDPs, SaaS dashboards, and landing pages without forcing one archetype's template onto another.
+  - Added reference manual `references/ecommerce-design-principles.md` and updated `checklists/ui-ux-review-checklist.md`.
+- **E-Commerce Implementation, Component Architecture & Performance (`frontend-quality`):**
+  - Documented responsive product grid reflow mechanics (`xl:grid-cols-5` -> `lg:grid-cols-4` -> `md:grid-cols-3` -> `grid-cols-2`), category sidebar drawer collapse, mobile 2-column to 1-column promotional banner stacking, and responsive specification table horizontal scroll or mobile definition list cards (`<dl>`).
+  - Implemented functional interactive standards: debounced search queries (250–300ms), reactive product gallery thumbnail synchronization, variant selection state binding, bounded quantity steppers, distinct async "Add to Cart" vs direct "Buy Now" flows, and WAI-ARIA tabbed specifications (`role="tablist"`).
+  - Enforced Core Web Vitals targets: eliminating layout shifts (CLS < 0.1) via fixed aspect ratio wrappers (`aspect-square` or `aspect-[4/5]`), optimizing LCP (<2.5s) via eager loading and head preloads for primary hero/PDP images, and lazy-loading below-the-fold grids.
+  - Added reference manual `references/ecommerce-implementation.md` and updated `checklists/frontend-performance-checklist.md`.
+- **Test Suite Updates:** Expanded unit test suite in `tests/unit/test_ui_ux_standards.py` with tests for v1.3.0 registry and frontmatter updates, update detection, and e-commerce design and implementation standards; updated catalogue reference file count assertion to 74 in `tests/unit/test_token_efficiency.py`.
+
 ## [0.2.2] - 2026-10-31
 
 ### Enhanced - Frontend Design Knowledge Base & Component Library Ecosystems (v1.2.0)

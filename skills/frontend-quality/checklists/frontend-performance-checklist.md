@@ -15,3 +15,8 @@
 - [ ] Are component libraries evaluated using the 10-point selection criteria before introducing new UI dependencies?
 - [ ] Do dashboard layouts collapse cleanly from multi-column grids to single column without horizontal overflow?
 - [ ] Are above-the-fold hero mockups optimized for LCP with eager loading and explicit aspect ratios?
+- [ ] Are product cards wrapped in explicit aspect ratio containers (`aspect-square` or `aspect-[4/5]`) to prevent layout shifts (CLS < 0.1)?
+- [ ] Is image loading priority based on viewport visibility (eager + `fetchpriority="high"` for primary hero/PDP assets, standard loading for visible thumbnails, and `loading="lazy"` strictly for below-the-fold content)?
+- [ ] Do asynchronous mutations (cart, wishlist, search, forms) handle loading, error states, and optimistic rollback upon failure?
+- [ ] Are variant swatches, quantity steppers, and cart actions keyboard-operable with bounded state and accessible names?
+- [ ] Do e-commerce specification tables reflow cleanly into responsive scrolling containers or definition lists on mobile?
