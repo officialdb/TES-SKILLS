@@ -58,3 +58,11 @@ Design fluidly and mobile-first:
 - Adapt navigation gracefully: present clean horizontal links on desktop and collapse to an accessible mobile hamburger menu at content-driven breakpoints.
 - Never allow horizontal viewport overflow.
 - Ensure touch targets are at least 44x44px on mobile viewports.
+
+### 6. Context-Sensitive Design & Domain Adaptability
+Every digital interface serves a specific user purpose. Visual design standards and layout density must adapt to the domain context rather than forcing a single template across all applications:
+- **E-Commerce Storefronts:** High content density, prominent search, multi-tiered category navigation, clear promotional rhythms, and reassuring trust indicators. See [ecommerce-design-principles.md](ecommerce-design-principles.md).
+- **Product Detail Pages (PDP):** Focused single-product presentation, clear buying decision hierarchy, accessible variant configuration, and technical specification tables. See [ecommerce-design-principles.md](ecommerce-design-principles.md).
+- **SaaS Dashboards:** Analytical workspace cards, persistent sidebars, scannable data metrics, and live timers. See [dashboard-design-principles.md](dashboard-design-principles.md).
+- **SaaS Landing Pages:** Centered editorial typography, single dominant primary CTA, and realistic product mockups. See [landing-page-design-principles.md](landing-page-design-principles.md).
+- **Visual Consistency Over Imitation:** Reusable principles (spacing systems, typography scales, neutral container foundations, purposeful accent colors) are universal; brand-specific palettes (such as forest greens or electric blues) are product-specific expressions, never universal mandates.

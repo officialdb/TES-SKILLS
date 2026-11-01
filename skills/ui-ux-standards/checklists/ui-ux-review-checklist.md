@@ -14,5 +14,8 @@
 - [ ] Does navigation adapt cleanly between desktop links and an accessible mobile hamburger menu without horizontal overflow?
 - [ ] Are dashboard widgets grouped cleanly into structured card containers with consistent padding and subtle borders?
 - [ ] Does the landing page feature clear editorial typography, a single dominant primary CTA, and product-led visual proof without decorative noise?
+- [ ] Do storefront product cards feature consistent aspect ratios, clear pricing/discount hierarchy, and distinct status badges?
+- [ ] Does the product detail page (PDP) maintain clear breadcrumbs, gallery hierarchy, distinct "Buy Now" vs "Add to Cart" actions, and structured specification tables?
+- [ ] Is the interface design tailored to its specific domain (storefront, PDP, dashboard, landing page) rather than forced into an unrelated template?
 - [ ] Are component library elements customized to match the project's brand tokens rather than relying on default library themes?
 - [ ] Do animations respect `@media (prefers-reduced-motion: reduce)`?

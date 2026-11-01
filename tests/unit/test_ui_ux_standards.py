@@ -108,16 +108,16 @@ def test_no_duplicate_instruction_blocks_between_ui_skills():
     assert len(cat_report.potential_duplicates) == 0, f"Duplicate blocks found: {cat_report.potential_duplicates}"
 
 
-def test_skills_versioned_at_1_2_0(loaded_registry: Registry, skills_dir: Path):
-    """Verify ui-ux-standards and frontend-quality are versioned at 1.2.0 in registry and frontmatter."""
+def test_skills_versioned_at_1_3_0(loaded_registry: Registry, skills_dir: Path):
+    """Verify ui-ux-standards and frontend-quality are versioned at 1.3.0 in registry and frontmatter."""
     ui_meta = loaded_registry.get_skill("ui-ux-standards")
     fq_meta = loaded_registry.get_skill("frontend-quality")
 
     assert ui_meta is not None
-    assert ui_meta.version == "1.2.0"
+    assert ui_meta.version == "1.3.0"
 
     assert fq_meta is not None
-    assert fq_meta.version == "1.2.0"
+    assert fq_meta.version == "1.3.0"
 
     # Verify unrelated skills remain at 1.0.0
     for sid in ["engineering-core", "software-engineering", "security-audit", "devops-engineering"]:
@@ -127,18 +127,18 @@ def test_skills_versioned_at_1_2_0(loaded_registry: Registry, skills_dir: Path):
     ui_fm, _, _ = parse_frontmatter((skills_dir / "ui-ux-standards" / "SKILL.md").read_text(encoding="utf-8"))
     fq_fm, _, _ = parse_frontmatter((skills_dir / "frontend-quality" / "SKILL.md").read_text(encoding="utf-8"))
 
-    assert str(ui_fm.get("version")) == "1.2.0"
-    assert str(fq_fm.get("version")) == "1.2.0"
+    assert str(ui_fm.get("version")) == "1.3.0"
+    assert str(fq_fm.get("version")) == "1.3.0"
 
 
-def test_update_mechanism_identifies_1_2_0_as_newer(temp_project: Path, loaded_registry: Registry):
-    """Verify TES update mechanism identifies 1.2.0 as an available update over installed 1.0.1 and 1.1.0."""
+def test_update_mechanism_identifies_1_3_0_as_newer(temp_project: Path, loaded_registry: Registry):
+    """Verify TES update mechanism identifies 1.3.0 as an available update over installed 1.1.0 and 1.2.0."""
     adapter = get_adapter("opencode")
     manifest = TargetManifest(
         skills={
             "ui-ux-standards": InstalledSkillManifest(
                 skill_id="ui-ux-standards",
-                version="1.1.0",
+                version="1.2.0",
                 installed_at="2026-10-31T10:51:00Z",
                 scope=Scope.PROJECT,
                 target="opencode",
@@ -147,7 +147,7 @@ def test_update_mechanism_identifies_1_2_0_as_newer(temp_project: Path, loaded_r
             ),
             "frontend-quality": InstalledSkillManifest(
                 skill_id="frontend-quality",
-                version="1.0.1",
+                version="1.1.0",
                 installed_at="2026-10-31T10:51:00Z",
                 scope=Scope.PROJECT,
                 target="opencode",
@@ -172,15 +172,15 @@ def test_update_mechanism_identifies_1_2_0_as_newer(temp_project: Path, loaded_r
 
     status_map = {s.skill_id: s for s in statuses}
 
-    # ui-ux-standards update available (1.1.0 -> 1.2.0)
+    # ui-ux-standards update available (1.2.0 -> 1.3.0)
     assert status_map["ui-ux-standards"].update_available is True
-    assert status_map["ui-ux-standards"].installed_version == "1.1.0"
-    assert status_map["ui-ux-standards"].latest_version == "1.2.0"
+    assert status_map["ui-ux-standards"].installed_version == "1.2.0"
+    assert status_map["ui-ux-standards"].latest_version == "1.3.0"
 
-    # frontend-quality update available (1.0.1 -> 1.2.0)
+    # frontend-quality update available (1.1.0 -> 1.3.0)
     assert status_map["frontend-quality"].update_available is True
-    assert status_map["frontend-quality"].installed_version == "1.0.1"
-    assert status_map["frontend-quality"].latest_version == "1.2.0"
+    assert status_map["frontend-quality"].installed_version == "1.1.0"
+    assert status_map["frontend-quality"].latest_version == "1.3.0"
 
     # engineering-core is up to date (1.0.0 == 1.0.0)
     assert status_map["engineering-core"].update_available is False
@@ -326,4 +326,69 @@ def test_frontend_quality_component_library_and_layout_references(skills_dir: Pa
     assert "overflow-x: clip" in lp_impl_text
     assert "Responsive Product Mockup Container" in lp_impl_text
     assert "Optimizing Core Web Vitals on Landing Pages" in lp_impl_text
+
+
+def test_ui_ux_standards_ecommerce_references(skills_dir: Path):
+    """Verify ui-ux-standards contains comprehensive references for e-commerce storefronts and product detail pages."""
+    skill_file = skills_dir / "ui-ux-standards" / "SKILL.md"
+    content = skill_file.read_text(encoding="utf-8")
+
+    # Main SKILL.md integration
+    assert "ecommerce-design-principles.md" in content
+    assert "E-Commerce Storefront Composition" in content
+    assert "Product Detail Page Architecture" in content
+    assert "Context-Sensitive Domain Design" in content
+
+    # E-commerce reference verification
+    ecom_file = skills_dir / "ui-ux-standards" / "references" / "ecommerce-design-principles.md"
+    assert ecom_file.exists()
+    ecom_text = ecom_file.read_text(encoding="utf-8")
+    assert "ZenVora E-commerce Storefront" in ecom_text
+    assert "SoundWave Product Detail Page" in ecom_text
+    assert "Direct Observations (Confirmed from Source)" in ecom_text
+    assert "Inferred Recommendations" in ecom_text
+    assert "Limitations of Reference A" in ecom_text
+    assert "Limitations of Reference B" in ecom_text
+    assert "Product Discovery & Product Card Design" in ecom_text
+    assert "Buying Decision Hierarchy" in ecom_text
+    assert "Context-Sensitive Design: Domain Adaptability" in ecom_text
+
+    # Checklist verification
+    cl_file = skills_dir / "ui-ux-standards" / "checklists" / "ui-ux-review-checklist.md"
+    cl_text = cl_file.read_text(encoding="utf-8")
+    assert "storefront product cards" in cl_text.lower()
+    assert "product detail page (pdp)" in cl_text.lower()
+
+
+def test_frontend_quality_ecommerce_references(skills_dir: Path):
+    """Verify frontend-quality contains detailed implementation standards for e-commerce grids, galleries, and vitals."""
+    skill_file = skills_dir / "frontend-quality" / "SKILL.md"
+    content = skill_file.read_text(encoding="utf-8")
+
+    # Main SKILL.md integration
+    assert "ecommerce-implementation.md" in content
+    assert "E-Commerce Architecture & Performance" in content
+
+    # E-commerce implementation guide verification
+    impl_file = skills_dir / "frontend-quality" / "references" / "ecommerce-implementation.md"
+    assert impl_file.exists()
+    impl_text = impl_file.read_text(encoding="utf-8")
+    assert "Responsive Grid Reflow Mechanics" in impl_text
+    assert "Product Image Gallery Synchronization" in impl_text
+    assert "Variant Selection (Color & Size)" in impl_text
+    assert "Bounded Quantity Controls" in impl_text
+    assert "Conversion Actions & Mutation Lifecycle" in impl_text
+    assert "Optimistic Updates & Rollback" in impl_text
+    assert "Accessible Tabbed Content" in impl_text
+    assert "Preventing Cumulative Layout Shift (CLS < 0.1)" in impl_text
+    assert "Viewport-Driven Image Priority" in impl_text
+    assert "AbortController" in impl_text
+
+    # Checklist verification
+    cl_file = skills_dir / "frontend-quality" / "checklists" / "frontend-performance-checklist.md"
+    cl_text = cl_file.read_text(encoding="utf-8")
+    assert "aspect ratio containers" in cl_text.lower()
+    assert "viewport visibility" in cl_text.lower()
+    assert "optimistic rollback" in cl_text.lower()
+
 
